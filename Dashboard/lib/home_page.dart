@@ -47,6 +47,7 @@ class _HomePageState extends State<HomePage> {
       padding: EdgeInsets.only(top: 15),
       child: Column(
         children: [
+          SizedBox(height: 200.0,),
           menuItem(1,"Dashboard",Icons.dashboard_outlined,currentPage == DrawerSections.dashboard ? true:false),
           menuItem(2,"Contacts",Icons.people_alt_outlined,currentPage==DrawerSections.contacts ? true:false),
           Divider(),

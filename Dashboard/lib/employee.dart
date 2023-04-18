@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 
 class Employee {
   String name ;
@@ -6,5 +5,5 @@ class Employee {
   int stress;
   int anxiety;
   int fatigue;
-  Employee(this.name,this.department,this.stress,this.anxiety,this.fatigue);
+  Employee({required this.name,required this.department,required this.stress,required this.anxiety,required this.fatigue});
 }
