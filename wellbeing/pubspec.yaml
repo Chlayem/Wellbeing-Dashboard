@@ -29,6 +29,8 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
+  pie_chart: ^5.3.2
+  syncfusion_flutter_charts: ^21.1.41
   google_fonts: ^4.0.3
   rxdart: ^0.27.7
   flutter:

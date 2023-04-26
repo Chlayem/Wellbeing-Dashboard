@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:wellbeing/src/blocs/eprovider.dart';
+import 'package:wellbeing/src/blocs/rprovider.dart';
 import 'package:wellbeing/src/elements/employee.dart';
 import 'package:wellbeing/src/screens/Details.dart';
 import 'package:wellbeing/src/screens/dash.dart';
+import 'package:wellbeing/src/screens/det.dart';
 import 'package:wellbeing/src/screens/parameters.dart';
 import 'blocs/provider.dart';
 import 'elements/drawer.dart';
@@ -20,7 +23,6 @@ final List<Employee> emp=[
 final mark =emp.where((e) => e.department=="Marketing").toList();
 final finn =emp.where((e) => e.department=="Finance").toList();
 final prod =emp.where((e) => e.department=="Production").toList();
-
 class Th extends StatelessWidget {
 
   final List<MenuuItem> items =[
@@ -37,77 +39,92 @@ class Th extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(theme:ThemeData(
-      textTheme: GoogleFonts.latoTextTheme(
-        Theme.of(context).textTheme,
-      ),
-      fontFamily:'SpaceGrotesk',
-    ),
-        home: Builder(builder: (BuildContext context) {
-      return MediaQuery.of(context).size.width > 700
-          ? Scaffold(
-          body: Row(
-            children: [
-              SizedBox(
-                width: MediaQuery.of(context).size.width*0.25,
-                child:Draweer(items: items),
-              ),
-              Expanded(
-                child: StreamBuilder<int>(
-                  stream: Provider.of(context).currentScreen,
-                  builder:
-                      (BuildContext context, AsyncSnapshot<int> snapshot) {
-                    if (!snapshot.hasData) {
-                      return Dash(emp: emp,); // Default screen to show when the stream doesn't have any data yet
-                    } else {
-                      switch (snapshot.data) {
-                        case 0:
-                          return Dash(emp: emp,);
-                        case 1:
-                          return Dash(emp: prod);
-                        case 2:
-                          return Dash(emp: finn);
-                        case 3:
-                          return Dash(emp: mark);
-                        case 4:
-                          return Parameters();/*Details(employee: Employee(name: "James Rodriguez", department: "Production", stress: 0, anxiety: 1, fatigue: 0,num: 286544452,
-                              email: "james.james@gmail.com",job: "Manager",workHours:36,birthDate: DateTime(1980,5,20),recDate: DateTime(2019,2,23)));*/
-                        default:
-                          return Dash(emp: emp,); // Default screen to show if the latest value in the stream doesn't match any of the cases
-                      }
+    return RProvider(
+      child: EProvider(
+        child: MaterialApp(theme:ThemeData(
+          textTheme: GoogleFonts.latoTextTheme(
+            Theme.of(context).textTheme,
+          ),
+          fontFamily:'SpaceGrotesk',
+        ),
+            home: Builder(builder: (BuildContext context) {
+          return MediaQuery.of(context).size.width > 700
+              ? Scaffold(
+              body: Row(
+                children: [
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width*0.25,
+                    child:Draweer(items: items),
+                  ),
+                  Expanded(
+                    child: StreamBuilder<int>(
+                      stream: Provider.of(context).currentScreen,
+                      builder:
+                          (BuildContext context, AsyncSnapshot<int> snapshot) {
+                        if (!snapshot.hasData) {
+                          return Dash(emp: emp,); // Default screen to show when the stream doesn't have any data yet
+                        } else {
+                          switch (snapshot.data) {
+                            case 0:
+                              RProvider.of(context).navigateToScreen(emp);
+                              return Dash(emp: emp,);
+                            case 1:
+                              RProvider.of(context).navigateToScreen(prod);
+                              return Dash(emp: prod);
+                            case 2:
+                              RProvider.of(context).navigateToScreen(finn);
+                              return Dash(emp: finn);
+                            case 3:
+                              RProvider.of(context).navigateToScreen(mark);
+                              return Dash(emp: mark);
+                            case 4:
+                              return Det(); //Details(employee: Employee(name: "James Rodriguez", department: "Production", stress: 0, anxiety: 1, fatigue: 0,num: 286544452,
+                                  //email: "james.james@gmail.com",job: "Manager",workHours:36,birthDate: DateTime(1980,5,20),recDate: DateTime(2019,2,23)));
+                            default:
+                              RProvider.of(context).navigateToScreen(emp);
+                              return Dash(emp: emp,); // Default screen to show if the latest value in the stream doesn't match any of the cases
+                          }
+                        }
+                      },
+                    ),
+                  ),
+                ],
+              ))
+              : Scaffold(
+            appBar: AppBar(title: Text('WellBeing Dashboard'),backgroundColor: Color.fromRGBO(3, 28, 48, 1.0),),
+            drawer: Draweer(items: items,),
+            body: StreamBuilder<int>(
+                stream: Provider.of(context).currentScreen,
+                builder: (BuildContext context, AsyncSnapshot<int> snapshot) {
+                  if (!snapshot.hasData) {
+                    RProvider.of(context).navigateToScreen(emp);
+                    return Dash(emp: emp,); // Default screen to show when the stream doesn't have any data yet
+                  } else {
+                    switch (snapshot.data) {
+                      case 0:
+                        RProvider.of(context).navigateToScreen(emp);
+                        return Dash(emp: emp,);
+                      case 1:
+                        RProvider.of(context).navigateToScreen(prod);
+                        return Dash(emp: prod);
+                      case 2:
+                        RProvider.of(context).navigateToScreen(finn);
+                        return Dash(emp: finn);
+                      case 3:
+                        RProvider.of(context).navigateToScreen(mark);
+                        return Dash(emp: mark);
+                      case 4:
+                        return Det(); //Details(employee: Employee(name: "James Rodriguez", department: "Production", stress: 0, anxiety: 1, fatigue: 0,
+                            //email: "james.james@gmail.com",job: "Manager",workHours:36,birthDate: DateTime(1980,5,20),recDate: DateTime(2019,2,23)));
+                      default:
+                        RProvider.of(context).navigateToScreen(emp);
+                        return Dash(emp: emp,); // Default screen to show if the latest value in the stream doesn't match any of the cases
                     }
-                  },
-                ),
-              ),
-            ],
-          ))
-          : Scaffold(
-        appBar: AppBar(title: Text('WellBeing Dashboard'),backgroundColor: Color.fromRGBO(3, 28, 48, 1.0),),
-        drawer: Draweer(items: items,),
-        body: StreamBuilder<int>(
-            stream: Provider.of(context).currentScreen,
-            builder: (BuildContext context, AsyncSnapshot<int> snapshot) {
-              if (!snapshot.hasData) {
-                return Dash(emp: emp,); // Default screen to show when the stream doesn't have any data yet
-              } else {
-                switch (snapshot.data) {
-                  case 0:
-                    return Dash(emp: emp,);
-                  case 1:
-                    return Dash(emp: prod);
-                  case 2:
-                    return Dash(emp: finn);
-                  case 3:
-                    return Dash(emp: mark);
-                  case 4:
-                    return Details(employee: Employee(name: "James Rodriguez", department: "Production", stress: 0, anxiety: 1, fatigue: 0,
-                        email: "james.james@gmail.com",job: "Manager",workHours:36,birthDate: DateTime(1980,5,20),recDate: DateTime(2019,2,23)));
-                  default:
-                    return Dash(emp: emp,); // Default screen to show if the latest value in the stream doesn't match any of the cases
-                }
-              }
-            }),
-      );
-    }));
+                  }
+                }),
+          );
+        })),
+      ),
+    );
   }
 }

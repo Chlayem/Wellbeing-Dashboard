@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wellbeing/src/blocs/pprovider.dart';
 import 'elements/menu_item.dart';
 import 'screens/homescreen.dart';
 import 'screens/team.dart';
@@ -24,20 +25,54 @@ class App extends StatelessWidget {
   ];
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(home: Builder(builder: (BuildContext context) {
-      return MediaQuery.of(context).size.width > 700
-          ? Scaffold(
-              body: Row(
-              children: [
-                SizedBox(
-                  width: MediaQuery.of(context).size.width*0.25,
-                  child:Draweer(items: items),
-                ),
-                Expanded(
-                  child: StreamBuilder<int>(
+    return PProvider(
+      child: MaterialApp(home: Builder(builder: (BuildContext context) {
+        return MediaQuery.of(context).size.width > 700
+            ? Scaffold(
+                body: Row(
+                children: [
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width*0.25,
+                    child:Draweer(items: items),
+                  ),
+                  Expanded(
+                    child: StreamBuilder<int>(
+                      stream: Provider.of(context).currentScreen,
+                      builder:
+                          (BuildContext context, AsyncSnapshot<int> snapshot) {
+                        if (!snapshot.hasData) {
+                          return Home(); // Default screen to show when the stream doesn't have any data yet
+                        } else {
+                          switch (snapshot.data) {
+                            case 0:
+                              return Home();
+                            case 1:
+                              return TeamScreen();
+                            case 2:
+                              return Indicators();
+                            case 3:
+                              return Data();
+                            case 4:
+                              return KPI();
+                            case 5:
+                              return YTD();
+                            case 6:
+                              return Parameters();
+                            default:
+                              return Home(); // Default screen to show if the latest value in the stream doesn't match any of the cases
+                          }
+                        }
+                      },
+                    ),
+                  ),
+                ],
+              ))
+            : Scaffold(
+                appBar: AppBar(title: Text('WellBeing Dashboard')),
+                drawer: Draweer(items: items,),
+                body: StreamBuilder<int>(
                     stream: Provider.of(context).currentScreen,
-                    builder:
-                        (BuildContext context, AsyncSnapshot<int> snapshot) {
+                    builder: (BuildContext context, AsyncSnapshot<int> snapshot) {
                       if (!snapshot.hasData) {
                         return Home(); // Default screen to show when the stream doesn't have any data yet
                       } else {
@@ -60,41 +95,9 @@ class App extends StatelessWidget {
                             return Home(); // Default screen to show if the latest value in the stream doesn't match any of the cases
                         }
                       }
-                    },
-                  ),
-                ),
-              ],
-            ))
-          : Scaffold(
-              appBar: AppBar(title: Text('WellBeing Dashboard')),
-              drawer: Draweer(items: items,),
-              body: StreamBuilder<int>(
-                  stream: Provider.of(context).currentScreen,
-                  builder: (BuildContext context, AsyncSnapshot<int> snapshot) {
-                    if (!snapshot.hasData) {
-                      return Home(); // Default screen to show when the stream doesn't have any data yet
-                    } else {
-                      switch (snapshot.data) {
-                        case 0:
-                          return Home();
-                        case 1:
-                          return TeamScreen();
-                        case 2:
-                          return Indicators();
-                        case 3:
-                          return Data();
-                        case 4:
-                          return KPI();
-                        case 5:
-                          return YTD();
-                        case 6:
-                          return Parameters();
-                        default:
-                          return Home(); // Default screen to show if the latest value in the stream doesn't match any of the cases
-                      }
-                    }
-                  }),
-            );
-    }));
+                    }),
+              );
+      })),
+    );
   }
 }
