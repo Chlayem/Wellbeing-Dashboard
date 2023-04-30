@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:wellbeing/src/blocs/provider.dart';
-import 'package:wellbeing/src/blocs/rprovider.dart';
-import '../blocs/eprovider.dart';
+
 import '../elements/employee.dart';
 
 class Dash extends StatelessWidget {
@@ -39,7 +38,7 @@ class Dash extends StatelessWidget {
       }else{
         result=emp.where((e) => e.name.toLowerCase().contains(entredKeyword.toLowerCase())).toList();
       }
-      RProvider.of(context).navigateToScreen(result);
+      Provider.of(context).pushList(result);
     }
     double searchWidth ;
     double screenWidth = MediaQuery.of(context).size.width;
@@ -69,7 +68,7 @@ class Dash extends StatelessWidget {
             ),
           ),
           StreamBuilder<List<Employee>>(
-              stream:RProvider.of(context).currentScreen,
+              stream:Provider.of(context).lists,
               builder:(BuildContext context, AsyncSnapshot<List<Employee>> snapshot){
                 if (snapshot.hasData && snapshot.data != null){
                 empFound= snapshot.data!;
@@ -83,7 +82,7 @@ class Dash extends StatelessWidget {
                         child: ListTile(
                           onTap: (){
                             Employee e =empFound[index];
-                            EProvider.of(context).navigateToScreen(e);
+                            Provider.of(context).pushEmployee(e);
                             Provider.of(context).navigateToScreen(4);
 
                           },

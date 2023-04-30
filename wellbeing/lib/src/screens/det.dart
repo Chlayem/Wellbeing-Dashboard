@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:wellbeing/src/blocs/eprovider.dart';
 
+import '../blocs/provider.dart';
 import '../elements/employee.dart';
 
 class Det extends StatelessWidget {
@@ -9,7 +9,7 @@ class Det extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
-      stream: EProvider.of(context).currentScreen,
+      stream: Provider.of(context).employees,
       builder: (BuildContext context, AsyncSnapshot<Employee> snapshot){
         if (snapshot.hasData && snapshot.data != null){
           return Container(

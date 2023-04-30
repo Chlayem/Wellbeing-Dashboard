@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:wellbeing/src/blocs/pprovider.dart';
 import 'elements/menu_item.dart';
 import 'screens/homescreen.dart';
 import 'screens/team.dart';
@@ -25,7 +24,7 @@ class App extends StatelessWidget {
   ];
   @override
   Widget build(BuildContext context) {
-    return PProvider(
+    return Provider(
       child: MaterialApp(home: Builder(builder: (BuildContext context) {
         return MediaQuery.of(context).size.width > 700
             ? Scaffold(
@@ -37,7 +36,7 @@ class App extends StatelessWidget {
                   ),
                   Expanded(
                     child: StreamBuilder<int>(
-                      stream: Provider.of(context).currentScreen,
+                      stream: Provider.of(context).screens,
                       builder:
                           (BuildContext context, AsyncSnapshot<int> snapshot) {
                         if (!snapshot.hasData) {
@@ -71,7 +70,7 @@ class App extends StatelessWidget {
                 appBar: AppBar(title: Text('WellBeing Dashboard')),
                 drawer: Draweer(items: items,),
                 body: StreamBuilder<int>(
-                    stream: Provider.of(context).currentScreen,
+                    stream: Provider.of(context).screens,
                     builder: (BuildContext context, AsyncSnapshot<int> snapshot) {
                       if (!snapshot.hasData) {
                         return Home(); // Default screen to show when the stream doesn't have any data yet
