@@ -4,6 +4,7 @@ import 'package:wellbeing/src/elements/employee.dart';
 import 'package:wellbeing/src/screens/Details.dart';
 import 'package:wellbeing/src/screens/dash.dart';
 import 'package:wellbeing/src/screens/det.dart';
+import 'package:wellbeing/src/screens/details_moblie.dart';
 import 'package:wellbeing/src/screens/parameters.dart';
 import 'blocs/provider.dart';
 import 'elements/drawer.dart';
@@ -45,7 +46,7 @@ class Th extends StatelessWidget {
       fontFamily:'SpaceGrotesk',
     ),
         home: Builder(builder: (BuildContext context) {
-      return MediaQuery.of(context).size.width > 700
+      return MediaQuery.of(context).size.width > 900
           ? Scaffold(
           body: Row(
             children: [
@@ -53,7 +54,8 @@ class Th extends StatelessWidget {
                 width: MediaQuery.of(context).size.width*0.25,
                 child:Draweer(items: items),
               ),
-              Expanded(
+              SizedBox(
+                width: MediaQuery.of(context).size.width*0.75,
                 child: StreamBuilder<int>(
                   stream: Provider.of(context).screens,
                   builder:
@@ -87,36 +89,36 @@ class Th extends StatelessWidget {
             ],
           ))
           : Scaffold(
-        appBar: AppBar(title: Text('WellBeing Dashboard'),backgroundColor: Color.fromRGBO(3, 28, 48, 1.0),),
-        drawer: Draweer(items: items,),
-        body: StreamBuilder<int>(
-            stream: Provider.of(context).screens,
-            builder: (BuildContext context, AsyncSnapshot<int> snapshot) {
-              if (!snapshot.hasData) {
-                Provider.of(context).pushList(emp);
-                return Dash(emp: emp,); // Default screen to show when the stream doesn't have any data yet
-              } else {
-                switch (snapshot.data) {
-                  case 0:
-                    Provider.of(context).pushList(emp);
-                    return Dash(emp: emp,);
-                  case 1:
-                    Provider.of(context).pushList(prod);
-                    return Dash(emp: prod);
-                  case 2:
-                    Provider.of(context).pushList(finn);
-                    return Dash(emp: finn);
-                  case 3:
-                    Provider.of(context).pushList(mark);
-                    return Dash(emp: mark);
-                  case 4:
-                    return Details();
-                  default:
-                    Provider.of(context).pushList(emp);
-                    return Dash(emp: emp,); // Default screen to show if the latest value in the stream doesn't match any of the cases
-                }
-              }
-            }),
+              appBar: AppBar(title: Text('WellBeing Dashboard'),backgroundColor: Color.fromRGBO(3, 28, 48, 1.0),),
+              drawer: Draweer(items: items,),
+              body: StreamBuilder<int>(
+                  stream: Provider.of(context).screens,
+                  builder: (BuildContext context, AsyncSnapshot<int> snapshot) {
+                    if (!snapshot.hasData) {
+                      Provider.of(context).pushList(emp);
+                      return Dash(emp: emp,); // Default screen to show when the stream doesn't have any data yet
+                    } else {
+                      switch (snapshot.data) {
+                        case 0:
+                          Provider.of(context).pushList(emp);
+                          return Dash(emp: emp,);
+                        case 1:
+                          Provider.of(context).pushList(prod);
+                          return Dash(emp: prod);
+                        case 2:
+                          Provider.of(context).pushList(finn);
+                          return Dash(emp: finn);
+                        case 3:
+                          Provider.of(context).pushList(mark);
+                          return Dash(emp: mark);
+                        case 4:
+                          return DetailsMobile();
+                        default:
+                          Provider.of(context).pushList(emp);
+                          return Dash(emp: emp,); // Default screen to show if the latest value in the stream doesn't match any of the cases
+                      }
+                    }
+                  }),
       );
     }));
   }

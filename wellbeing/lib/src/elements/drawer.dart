@@ -23,14 +23,14 @@ class Draweer extends StatelessWidget {
               if(items[i].isExpansion){
                 List<MenuuItem>? l=items[i].exItems;
                 return Padding(
-                  padding: const EdgeInsets.fromLTRB(40.0,5.0,5.0,5.0),
+                  padding: const EdgeInsets.fromLTRB(5.0,5.0,5.0,5.0),
                   child: ExpansionTile(
                     iconColor: Colors.white,
                     collapsedIconColor: Colors.white,
                     leading: Icon(items[i].icon,color: Colors.white,),
                     title: Text(items[i].title,style:TextStyle(
                       color: Colors.white,
-                      letterSpacing: 3.0,
+                      //letterSpacing: 3.0,
                     ) ,),
                     children: [
                       ListView.builder(
@@ -54,7 +54,7 @@ class Draweer extends StatelessWidget {
                   ),
                 );
               } else{return Padding(
-                padding: EdgeInsets.fromLTRB(40.0,5.0,5.0,5.0),
+                padding: EdgeInsets.fromLTRB(5.0,5.0,5.0,5.0),
                 child: ListTile(
                   //selected: items[i].isSelected,
                   //selectedColor: Colors.black,
@@ -62,7 +62,7 @@ class Draweer extends StatelessWidget {
                   leading: Icon(items[i].icon,color: Colors.white,),
                   title: Text(items[i].title,style: TextStyle(
                     color: Colors.white,
-                    letterSpacing: 3.0,
+                    //letterSpacing: 3.0,
                   ),),
                   onTap: (){
                     //items[i].isSelected=true;

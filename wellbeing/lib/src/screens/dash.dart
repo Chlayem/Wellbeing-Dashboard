@@ -25,9 +25,6 @@ class Dash extends StatelessWidget {
 
   List<Employee> empFound =[];
 
-
-
-
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -55,71 +52,75 @@ class Dash extends StatelessWidget {
 
 
     return Container(
-      child: Column(
-        children: [
-          Container(
-            width: searchWidth,
-            child: TextField(
-              onChanged: (value) => runFilter(value),
-              decoration: const InputDecoration(
-                  labelText: 'Search',
-                  suffixIcon: Icon(Icons.search)
+      alignment: Alignment.topCenter,
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            Container(
+              width: searchWidth,
+              child: TextField(
+                onChanged: (value) => runFilter(value),
+                decoration: const InputDecoration(
+                    labelText: 'Search',
+                    suffixIcon: Icon(Icons.search)
+                ),
               ),
             ),
-          ),
-          StreamBuilder<List<Employee>>(
-              stream:Provider.of(context).lists,
-              builder:(BuildContext context, AsyncSnapshot<List<Employee>> snapshot){
-                if (snapshot.hasData && snapshot.data != null){
-                empFound= snapshot.data!;
-                return ListView.builder(
-                  shrinkWrap: true,
-                  itemCount: empFound.length,
-                  itemBuilder: (context,index){
-                    return Padding(
-                      padding: EdgeInsets.symmetric(vertical: 1.0,horizontal: cardPadding),
-                      child: Card(
-                        child: ListTile(
-                          onTap: (){
-                            Employee e =empFound[index];
-                            Provider.of(context).pushEmployee(e);
-                            Provider.of(context).navigateToScreen(4);
+            StreamBuilder<List<Employee>>(
+                stream:Provider.of(context).lists,
+                builder:(BuildContext context, AsyncSnapshot<List<Employee>> snapshot){
+                  if (snapshot.hasData && snapshot.data != null){
+                  empFound= snapshot.data!;
+                  return ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: empFound.length,
+                    itemBuilder: (context,index){
+                      return Padding(
+                        padding: EdgeInsets.symmetric(vertical: 1.0,horizontal: cardPadding),
+                        child: Card(
+                          child: ListTile(
+                            onTap: (){
+                              Employee e =empFound[index];
+                              Provider.of(context).pushEmployee(e);
+                              Provider.of(context).pushCsl(e.csl??[]);
+                              Provider.of(context).navigateToScreen(4);
 
-                          },
-                          title: Row(
-                            children: [
-                              Expanded(child: Text(empFound[index].name)),
-                              Expanded(
-                                  child: Row(
-                                    children: [
-                                      Expanded(flex:6,child: Text(empFound[index].department)),
-                                      Expanded(child: setColor(empFound[index].stress)),
-                                      Expanded(child: setColor(empFound[index].anxiety)),
-                                      Expanded(child: setColor(empFound[index].fatigue))
-                                    ],
-                                  )
-                              ),
+                            },
+                            title: Row(
+                              children: [
+                                Expanded(child: Text(empFound[index].name)),
+                                Expanded(
+                                    child: Row(
+                                      children: [
+                                        Expanded(flex:6,child: Text(empFound[index].department)),
+                                        Expanded(child: setColor(empFound[index].stress)),
+                                        Expanded(child: setColor(empFound[index].anxiety)),
+                                        Expanded(child: setColor(empFound[index].fatigue))
+                                      ],
+                                    )
+                                ),
 
-                            ],
+                              ],
+                            ),
+
+                            //leading: CircleAvatar(
+                            //  backgroundImage: AssetImage("assets/${empFound[index].name}.jpg"),
+                            //),
+
                           ),
 
-                          //leading: CircleAvatar(
-                          //  backgroundImage: AssetImage("assets/${empFound[index].name}.jpg"),
-                          //),
-
                         ),
+                      );
+                    },
 
-                      ),
-                    );
-                  },
-
-                );} else {
-                return Center(
-                child: CircularProgressIndicator(),
-                );
-              }}
-          ) ,
-        ],
+                  );} else {
+                  return Center(
+                  child: CircularProgressIndicator(),
+                  );
+                }}
+            ) ,
+          ],
+        ),
       ),
     );
     throw UnimplementedError();
