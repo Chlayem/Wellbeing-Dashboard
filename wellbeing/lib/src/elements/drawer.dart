@@ -7,7 +7,7 @@ class Draweer extends StatelessWidget {
   Draweer({required this.items});
   Widget build(context) {
     //bool s=false;
-    //double screenHeight = MediaQuery.of(context).size.height;
+    double screenWidth = MediaQuery.of(context).size.width;
     //double itemSpacing = screenHeight * 0.02;
 
     return Drawer(
@@ -46,7 +46,13 @@ class Draweer extends StatelessWidget {
                                 color: Colors.white,
                                 fontSize: 15.0,
                               ),),
-                              onTap: () =>Provider.of(context).navigateToScreen(l[j].screenIndex),
+                              onTap: () {
+                                if(screenWidth <= 900){
+                                  Navigator.of(context).pop();
+                                }
+                                Provider.of(context).navigateToScreen(l[j].screenIndex);
+
+                              }
                             ),
                           );
                         }
@@ -66,8 +72,12 @@ class Draweer extends StatelessWidget {
                   ),),
                   onTap: (){
                     //items[i].isSelected=true;
+                    if(screenWidth <= 900){
+                      Navigator.of(context).pop();
+                    }
                     Provider.of(context).navigateToScreen(items[i].screenIndex);
-                    },
+
+                  },
                 ),
               );}
             }

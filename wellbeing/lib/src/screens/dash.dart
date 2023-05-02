@@ -33,7 +33,7 @@ class Dash extends StatelessWidget {
       if(entredKeyword.isEmpty){
         result=emp;
       }else{
-        result=emp.where((e) => e.name.toLowerCase().contains(entredKeyword.toLowerCase())).toList();
+        result=emp.where((e) => e.firstName.toLowerCase().contains(entredKeyword.toLowerCase())).toList();
       }
       Provider.of(context).pushList(result);
     }
@@ -88,7 +88,7 @@ class Dash extends StatelessWidget {
                             },
                             title: Row(
                               children: [
-                                Expanded(child: Text(empFound[index].name)),
+                                Expanded(child: Text(empFound[index].firstName)),
                                 Expanded(
                                     child: Row(
                                       children: [

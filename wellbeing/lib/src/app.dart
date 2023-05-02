@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'elements/employee.dart';
 import 'elements/menu_item.dart';
 import 'screens/homescreen.dart';
 import 'screens/team.dart';
@@ -9,7 +10,15 @@ import 'elements/drawer.dart';
 import 'screens/indicators.dart';
 import 'screens/ytd.dart';
 import 'screens/data.dart';
-
+final List<Employee> emp=[
+  Employee(firstName: "Jhon",lastName:"Rodriguez",department: "Marketing",stress:1,anxiety: 2,fatigue: 0,email: "jhon.james@gmail.com",job: "Manager",workHours:36,birthDate: DateTime(1980,5,20),recDate: DateTime(2019,2,23),num: 28664020),
+  Employee(firstName: "Kevin",lastName:"Rodriguez",department: "Production",stress: 0,anxiety: 0,fatigue: 1,email: "kevin.james@gmail.com",job: "Manager",workHours:36,birthDate: DateTime(1980,5,20),recDate: DateTime(2019,2,23),num: 25668744),
+  Employee(firstName: "Emma",lastName:"Rodriguez",department: "Marketing",stress: 1,anxiety: 0,fatigue: 2,email: "emma.james@gmail.com",job: "Developer",workHours:36,birthDate: DateTime(1980,5,20),recDate: DateTime(2019,2,23),num: 55870099),
+  Employee(firstName: "James",lastName:"Rodriguez",department: "Finance",stress: 1,anxiety: 0,fatigue: 2,email: "james.james@gmail.com",job: "Engineer",workHours:36,birthDate: DateTime(1980,5,20),recDate: DateTime(2019,2,23),num: 92050886),
+  Employee(firstName: "Fred",lastName:"Rodriguez",department: "Finance",stress: 1,anxiety: 0,fatigue: 2,email: "fred.james@gmail.com",job: "Developer",workHours:36,birthDate: DateTime(1980,5,20),recDate: DateTime(2019,2,23),num: 99885020),
+  Employee(firstName: "Selena",lastName:"Rodriguez",department: "Marketing",stress: 1,anxiety: 0,fatigue: 2,email: "selena.james@gmail.com",job: "Manager",workHours:36,birthDate: DateTime(1980,5,20),recDate: DateTime(2019,2,23),num: 21741133),
+  Employee(firstName: "Adam",lastName:"Rodriguez",department: "Marketing",stress: 1,anxiety: 0,fatigue: 2,email: "adam.james@gmail.com",job: "Manager",workHours:36,birthDate: DateTime(1980,5,20),recDate: DateTime(2019,2,23),num: 52114189),
+];
 class App extends StatelessWidget {
   final List<MenuuItem> items =[
     MenuuItem(title: "Home", icon: Icons.home,screenIndex: 0),
@@ -46,7 +55,7 @@ class App extends StatelessWidget {
                             case 0:
                               return Home();
                             case 1:
-                              return TeamScreen();
+                              return Crud(emp: emp);
                             case 2:
                               return Indicators();
                             case 3:
@@ -67,7 +76,7 @@ class App extends StatelessWidget {
                 ],
               ))
             : Scaffold(
-                appBar: AppBar(title: Text('WellBeing Dashboard')),
+                appBar: AppBar(title: Text('WellBeing Dashboard'),backgroundColor: Color.fromRGBO(3, 28, 48, 1.0)),
                 drawer: Draweer(items: items,),
                 body: StreamBuilder<int>(
                     stream: Provider.of(context).screens,
@@ -79,7 +88,7 @@ class App extends StatelessWidget {
                           case 0:
                             return Home();
                           case 1:
-                            return TeamScreen();
+                            return Crud(emp: emp);
                           case 2:
                             return Indicators();
                           case 3:

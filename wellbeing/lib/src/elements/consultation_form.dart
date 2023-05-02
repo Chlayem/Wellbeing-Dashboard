@@ -19,29 +19,48 @@ class ConsultationForm extends StatelessWidget {
       return d;
 
     }
-    return Column(
-      children: [
-        TextButton.icon(
-          icon: Icon(Icons.calendar_month_rounded),
-          onPressed: (){
-            date =_showDatePicker();
-          },
-          label: Text("Date de consultation"),
-        ),
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 15,vertical:8 ),
+      child: Column(
+        children: [
+          Row(
+            children: [
+              Expanded(
+                child: TextField(
+                  keyboardType: TextInputType.multiline,
+                  minLines: 1,
+                  maxLines: null,
+                  controller: _bilanController,
+                  decoration: InputDecoration(labelText: 'Bilan',border:InputBorder.none),
 
-        TextField(
-          controller: _bilanController,
-          decoration: InputDecoration(labelText: 'Bilan'),
-        ),
-        ElevatedButton(
-          child: Text('Add Consultation'),
-          onPressed: (){
-            final bilan = _bilanController.text;
-            Provider.of(context).addCsl(Consultation(date: date, bilan: bilan));
-            _bilanController.clear();
-          },
-        ),
-      ],
+                ),
+              ),
+              IconButton(
+                icon: Icon(Icons.calendar_month_rounded),
+                onPressed: (){
+                  date =_showDatePicker();
+                },
+                //label: Text("Date de consultation"),
+              ),
+
+            ],
+          ),
+          Row(
+            children: [
+              Expanded(
+                child: ElevatedButton(
+                  child: Text('Add consultation'),
+                  onPressed: (){
+                    final bilan = _bilanController.text;
+                    Provider.of(context).addCsl(Consultation(date: date, bilan: bilan));
+                    _bilanController.clear();
+                  },
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
     );
   }
 }

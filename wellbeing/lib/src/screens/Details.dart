@@ -39,7 +39,7 @@ class Details extends StatelessWidget {
                             //),
                             title: Row(
                               children: [
-                                Expanded(child: Text(employee.name)),
+                                Expanded(child: Text(employee.firstName)),
                                 TextButton.icon(
                                   onPressed: (){},
                                   icon: Icon(Icons.calendar_month_rounded),

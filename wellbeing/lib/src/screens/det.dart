@@ -13,7 +13,7 @@ class Det extends StatelessWidget {
       builder: (BuildContext context, AsyncSnapshot<Employee> snapshot){
         if (snapshot.hasData && snapshot.data != null){
           return Container(
-            child: Text(snapshot.data!.name),
+            child: Text(snapshot.data!.firstName),
           );
         }else{
           return SizedBox();
