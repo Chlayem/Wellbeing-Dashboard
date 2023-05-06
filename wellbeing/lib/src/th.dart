@@ -3,23 +3,60 @@ import 'package:flutter/material.dart';
 import 'package:wellbeing/src/elements/employee.dart';
 import 'package:wellbeing/src/screens/Details.dart';
 import 'package:wellbeing/src/screens/dash.dart';
-import 'package:wellbeing/src/screens/det.dart';
-import 'package:wellbeing/src/screens/details_moblie.dart';
 import 'package:wellbeing/src/screens/parameters.dart';
 import 'blocs/provider.dart';
+import 'elements/chart_data.dart';
 import 'elements/drawer.dart';
 import 'elements/menu_item.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 final List<Employee> emp=[
-  Employee(firstName: "Jhon",lastName:"Rodriguez",department: "Marketing",stress:1,anxiety: 2,fatigue: 0,email: "jhon.james@gmail.com",job: "Manager",workHours:36,birthDate: DateTime(1980,5,20),recDate: DateTime(2019,2,23),num: 28664020),
-  Employee(firstName: "Kevin",lastName:"Rodriguez",department: "Production",stress: 0,anxiety: 0,fatigue: 1,email: "kevin.james@gmail.com",job: "Manager",workHours:36,birthDate: DateTime(1980,5,20),recDate: DateTime(2019,2,23),num: 25668744),
-  Employee(firstName: "Emma",lastName:"Rodriguez",department: "Marketing",stress: 1,anxiety: 0,fatigue: 2,email: "emma.james@gmail.com",job: "Developer",workHours:36,birthDate: DateTime(1980,5,20),recDate: DateTime(2019,2,23),num: 55870099),
-  Employee(firstName: "James",lastName:"Rodriguez",department: "Finance",stress: 1,anxiety: 0,fatigue: 2,email: "james.james@gmail.com",job: "Engineer",workHours:36,birthDate: DateTime(1980,5,20),recDate: DateTime(2019,2,23),num: 92050886),
-  Employee(firstName: "Fred",lastName:"Rodriguez",department: "Finance",stress: 1,anxiety: 0,fatigue: 2,email: "fred.james@gmail.com",job: "Developer",workHours:36,birthDate: DateTime(1980,5,20),recDate: DateTime(2019,2,23),num: 99885020),
-  Employee(firstName: "Selena",lastName:"Rodriguez",department: "Marketing",stress: 1,anxiety: 0,fatigue: 2,email: "selena.james@gmail.com",job: "Manager",workHours:36,birthDate: DateTime(1980,5,20),recDate: DateTime(2019,2,23),num: 21741133),
-  Employee(firstName: "Adam",lastName:"Rodriguez",department: "Marketing",stress: 1,anxiety: 0,fatigue: 2,email: "adam.james@gmail.com",job: "Manager",workHours:36,birthDate: DateTime(1980,5,20),recDate: DateTime(2019,2,23),num: 52114189),
-];
+  Employee(firstName: "Jhon",lastName:"Rodriguez",department: "Marketing",stress:[
+    ChartData(month: "Jan", value: 2),
+    ChartData(month: "Feb", value: 1),
+    ChartData(month: "Mar", value: 1),
+    ChartData(month: "Apr", value: 0),
+    ChartData(month: "May", value: 2),
+    ChartData(month: "Jun", value: 1),
+    ChartData(month: "Jul", value: 0),
+    ChartData(month: "Aug", value: 0),
+    ChartData(month: "Sep", value: 0),
+    ChartData(month: "Oct", value: 0),
+    ChartData(month: "Nov", value: 0),
+    ChartData(month: "Dec", value: 1),
+  ],anxiety: [
+    ChartData(month: "Jan", value: 0),
+    ChartData(month: "Feb", value: 1),
+    ChartData(month: "Mar", value: 1),
+    ChartData(month: "Apr", value: 0),
+    ChartData(month: "May", value: 2),
+    ChartData(month: "Jun", value: 2),
+    ChartData(month: "Jul", value: 2),
+    ChartData(month: "Aug", value: 1),
+    ChartData(month: "Sep", value: 2),
+    ChartData(month: "Oct", value: 2),
+    ChartData(month: "Nov", value: 0),
+    ChartData(month: "Dec", value: 0),
+  ],fatigue: [
+    ChartData(month: "Jan", value: 2),
+    ChartData(month: "Feb", value: 1),
+    ChartData(month: "Mar", value: 1),
+    ChartData(month: "Apr", value: 0),
+    ChartData(month: "May", value: 2),
+    ChartData(month: "Jun", value: 1),
+    ChartData(month: "Jul", value: 0),
+    ChartData(month: "Aug", value: 1),
+    ChartData(month: "Sep", value: 2),
+    ChartData(month: "Oct", value: 2),
+    ChartData(month: "Nov", value: 0),
+    ChartData(month: "Dec", value: 1),
+  ],email: "jhon.james@gmail.com",job: "Manager",workHours:36,birthDate: DateTime(1980,5,20),recDate: DateTime(2019,2,23),num: 28664020),
+  Employee(firstName: "Kevin",lastName:"Rodriguez",department: "Production",stress: [ChartData(month: "Mars")],anxiety: [ChartData(month: "Mars")],fatigue: [ChartData(month: "Mars")],email: "kevin.james@gmail.com",job: "Manager",workHours:36,birthDate: DateTime(1980,5,20),recDate: DateTime(2019,2,23),num: 25668744),
+  Employee(firstName: "Emma",lastName:"Rodriguez",department: "Marketing",stress: [ChartData(month: "Mars")],anxiety: [ChartData(month: "Mars")],fatigue: [ChartData(month: "Mars")],email: "emma.james@gmail.com",job: "Developer",workHours:36,birthDate: DateTime(1980,5,20),recDate: DateTime(2019,2,23),num: 55870099),
+  Employee(firstName: "James",lastName:"Rodriguez",department: "Finance",stress: [ChartData(month: "Mars")],anxiety: [ChartData(month: "Mars")],fatigue: [ChartData(month: "Mars")],email: "james.james@gmail.com",job: "Engineer",workHours:36,birthDate: DateTime(1980,5,20),recDate: DateTime(2019,2,23),num: 92050886),
+  Employee(firstName: "Fred",lastName:"Rodriguez",department: "Finance",stress: [ChartData(month: "Mars")],anxiety: [ChartData(month: "Mars")],fatigue: [ChartData(month: "Mars")],email: "fred.james@gmail.com",job: "Developer",workHours:36,birthDate: DateTime(1980,5,20),recDate: DateTime(2019,2,23),num: 99885020),
+  Employee(firstName: "Selena",lastName:"Rodriguez",department: "Marketing",stress: [ChartData(month: "Mars")],anxiety: [ChartData(month: "Mars")],fatigue: [ChartData(month: "Mars")],email: "selena.james@gmail.com",job: "Manager",workHours:36,birthDate: DateTime(1980,5,20),recDate: DateTime(2019,2,23),num: 21741133),
+  Employee(firstName: "Adam",lastName:"Rodriguez",department: "Marketing",stress: [ChartData(month: "Mars")],anxiety: [ChartData(month: "Mars")],fatigue: [ChartData(month: "Mars")],email: "adam.james@gmail.com",job: "Manager",workHours:36,birthDate: DateTime(1980,5,20),recDate: DateTime(2019,2,23),num: 52114189),];
 final mark =emp.where((e) => e.department=="Marketing").toList();
 final finn =emp.where((e) => e.department=="Finance").toList();
 final prod =emp.where((e) => e.department=="Production").toList();
@@ -32,19 +69,19 @@ class Th extends StatelessWidget {
       MenuuItem(title: "Finance",  screenIndex: 2),
       MenuuItem(title: "Marketing", screenIndex: 3)
     ]),
-    MenuuItem(title: "Settings", icon: Icons.settings, screenIndex: 4),
+    MenuuItem(title: "Log out", icon: Icons.logout_outlined, screenIndex: 4),
   ];
 
 
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(theme:ThemeData(
+    return MaterialApp(/*theme:ThemeData(
       textTheme: GoogleFonts.latoTextTheme(
         Theme.of(context).textTheme,
       ),
       fontFamily:'SpaceGrotesk',
-    ),
+    ),*/
         home: Builder(builder: (BuildContext context) {
       return MediaQuery.of(context).size.width > 900
           ? Scaffold(
@@ -112,7 +149,7 @@ class Th extends StatelessWidget {
                           Provider.of(context).pushList(mark);
                           return Dash(emp: mark);
                         case 4:
-                          return DetailsMobile();
+                          return Details();
                         default:
                           Provider.of(context).pushList(emp);
                           return Dash(emp: emp,); // Default screen to show if the latest value in the stream doesn't match any of the cases

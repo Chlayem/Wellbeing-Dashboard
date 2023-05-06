@@ -3,14 +3,13 @@ import 'package:flutter/material.dart';
 import '../blocs/provider.dart';
 import 'consultation.dart';
 
-
 class ConsultationForm extends StatelessWidget {
-  DateTime date =DateTime.now();
+  DateTime date = DateTime.now();
   final _bilanController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-    DateTime _showDatePicker(){
+    /*DateTime _showDatePicker(){
       DateTime d =DateTime.now();
       showDatePicker(context: context,
           initialDate: DateTime.now(),
@@ -18,9 +17,9 @@ class ConsultationForm extends StatelessWidget {
           lastDate: DateTime(2024)).then((value) =>d=value ?? DateTime.now());
       return d;
 
-    }
+    }*/
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 15,vertical:8 ),
+      padding: EdgeInsets.symmetric(horizontal: 15, vertical: 8),
       child: Column(
         children: [
           Row(
@@ -31,18 +30,26 @@ class ConsultationForm extends StatelessWidget {
                   minLines: 1,
                   maxLines: null,
                   controller: _bilanController,
-                  decoration: InputDecoration(labelText: 'Bilan',border:InputBorder.none),
-
+                  decoration: InputDecoration(
+                      labelText: 'Bilan', border: InputBorder.none),
                 ),
               ),
               IconButton(
                 icon: Icon(Icons.calendar_month_rounded),
-                onPressed: (){
-                  date =_showDatePicker();
+                onPressed: () {
+                  showDatePicker(
+                    context: context,
+                    initialDate: DateTime.now(),
+                    firstDate: DateTime(2000),
+                    lastDate: DateTime(2024),
+                  ).then((value) {
+                    if (value != null) {
+                      date = value;
+                    }
+                  });
                 },
                 //label: Text("Date de consultation"),
               ),
-
             ],
           ),
           Row(
@@ -50,9 +57,10 @@ class ConsultationForm extends StatelessWidget {
               Expanded(
                 child: ElevatedButton(
                   child: Text('Add consultation'),
-                  onPressed: (){
+                  onPressed: () {
                     final bilan = _bilanController.text;
-                    Provider.of(context).addCsl(Consultation(date: date, bilan: bilan));
+                    Provider.of(context)
+                        .addCsl(Consultation(date: date, bilan: bilan));
                     _bilanController.clear();
                   },
                 ),

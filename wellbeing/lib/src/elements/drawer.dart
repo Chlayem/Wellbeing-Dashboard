@@ -15,7 +15,21 @@ class Draweer extends StatelessWidget {
       backgroundColor: Color.fromRGBO(3, 28, 48, 1.0),
       child: Column(
         children: [
-          SizedBox(height: 150.0,),
+          Container(
+            padding: EdgeInsets.symmetric(horizontal: 10.0,vertical: 40.0),
+            child: ListTile(
+              leading: CircleAvatar(
+                backgroundImage: AssetImage("assets/Jhon.jpg"),
+              ),
+              title: Text("James Rodriguez",style: TextStyle(color: Colors.white,),),
+              subtitle: Text("Responsable ressources humaines",style: TextStyle(color: Colors.grey),),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 40.0),
+            child: Divider(color: Colors.white,),
+          ),
+          //SizedBox(height: 50.0,),
           ListView.builder(
             shrinkWrap: true,
             itemCount: items.length,
@@ -47,7 +61,7 @@ class Draweer extends StatelessWidget {
                                 fontSize: 15.0,
                               ),),
                               onTap: () {
-                                if(screenWidth <= 900){
+                                if(screenWidth <= 1100){
                                   Navigator.of(context).pop();
                                 }
                                 Provider.of(context).navigateToScreen(l[j].screenIndex);
@@ -72,7 +86,7 @@ class Draweer extends StatelessWidget {
                   ),),
                   onTap: (){
                     //items[i].isSelected=true;
-                    if(screenWidth <= 900){
+                    if(screenWidth <= 1100){
                       Navigator.of(context).pop();
                     }
                     Provider.of(context).navigateToScreen(items[i].screenIndex);
@@ -84,219 +98,6 @@ class Draweer extends StatelessWidget {
           ),
         ],
       ),
-      /*child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: <Widget>[
-          SizedBox(height: screenHeight * 0.14),
-          // add 20% of screen height from top
-          Expanded(
-            child: ListView(
-              padding: EdgeInsets.zero,
-              children: <Widget>[
-                SizedBox(height: itemSpacing),
-                ListTile(
-                  hoverColor: Colors.white,
-                  title: Row(children: const [
-                    Expanded(
-                        flex: 1,
-                        child: Align(
-                            alignment: Alignment.centerRight,
-                            child: Icon(Icons.home))),
-                    Expanded(
-                        flex: 2,
-                        child: Align(
-                            alignment: Alignment.centerLeft,
-                            child: Text(
-                              'Home Screen',
-                              style: TextStyle(
-                                letterSpacing: 3.0,
-                              ),
-                            ))),
-                  ]),
-                  onTap: () {
-                    Provider.of(context).navigateToScreen(0);
-                  },
-                ),
-                SizedBox(height: itemSpacing),
-                ListTile(
-                  hoverColor: Colors.white,
-                  title: Row(children: const [
-                    Expanded(
-                        flex: 1,
-                        child: Align(
-                            alignment: Alignment.centerRight,
-                            child: Icon(Icons.people))),
-                    Expanded(
-                        flex: 2,
-                        child: Align(
-                            alignment: Alignment.centerLeft,
-                            child: Text(
-                              'Team Screen',
-                              style: TextStyle(
-                                letterSpacing: 3.0,
-                              ),
-                            ))),
-                  ]),
-                  onTap: () {
-                    Provider.of(context).navigateToScreen(1);
-                  },
-                ),
-                SizedBox(height: itemSpacing),
-                Theme(
-                    data: ThemeData(
-                      hoverColor: Colors.white,
-                    ),
-                    child:ExpansionTile(
-                      tilePadding: EdgeInsets.only(left: screenHeight*.04),
-                      childrenPadding: EdgeInsets.only(left: screenHeight*.08),
-                      title: Row(children: const [
-                        Expanded(
-                            flex: 1,
-                            child: Align(
-                                alignment: Alignment.centerRight,
-                                child: Icon(Icons.add_chart))),
-                        Expanded(
-                            flex: 2,
-                            child: Align(
-                                alignment: Alignment.centerLeft,
-                                child: Text(
-                                  'KPI',
-                                  style: TextStyle(
-                                    letterSpacing: 3.0,
-                                  ),
-                                ))),
-                      ]),
-                      children: [
-                        ListTile(
-                          hoverColor: Colors.white,
-                          title: Row(children: const [
-                            Expanded(
-                                flex: 1,
-                                child: Align(
-                                    alignment: Alignment.centerRight,
-                                    child: Icon(Icons.table_rows_rounded))),
-                            Expanded(
-                                flex: 2,
-                                child: Align(
-                                    alignment: Alignment.centerLeft,
-                                    child: Text(
-                                      'Indicators',
-                                      style: TextStyle(
-                                        letterSpacing: 3.0,
-                                      ),
-                                    ))),
-                          ]),
-                          onTap: () {
-                            Provider.of(context).navigateToScreen(4);
-                          },
-                        ),
-                        SizedBox(height: itemSpacing / 2),
-                        ListTile(
-                          hoverColor: Colors.white,
-                          title: Row(children: const [
-                            Expanded(
-                                flex: 1,
-                                child: Align(
-                                    alignment: Alignment.centerRight,
-                                    child: Icon(Icons.table_view_rounded))),
-                            Expanded(
-                                flex: 2,
-                                child: Align(
-                                    alignment: Alignment.centerLeft,
-                                    child: Text(
-                                      'DATA',
-                                      style: TextStyle(
-                                        letterSpacing: 3.0,
-                                      ),
-                                    ))),
-                          ]),
-                          onTap: () {
-                            Provider.of(context).navigateToScreen(5);
-                          },
-                        ),
-                        SizedBox(height: itemSpacing),
-                        ListTile(
-                          hoverColor: Colors.white,
-                          title: Row(children: const [
-                            Expanded(
-                                flex: 1,
-                                child: Align(
-                                    alignment: Alignment.centerRight,
-                                    child: Icon(Icons.area_chart))),
-                            Expanded(
-                                flex: 2,
-                                child: Align(
-                                    alignment: Alignment.centerLeft,
-                                    child: Text(
-                                      'Monthly Dashboard',
-                                      style: TextStyle(
-                                        letterSpacing: 3.0,
-                                      ),
-                                    ))),
-                          ]),
-                          onTap: () {
-                            Provider.of(context).navigateToScreen(2);
-                          },
-                        ),
-                        SizedBox(height: itemSpacing),
-                        ListTile(
-                          hoverColor: Colors.white,
-                          title: Row(children: const [
-                            Expanded(
-                                flex: 1,
-                                child: Align(
-                                    alignment: Alignment.centerRight,
-                                    child: Icon(Icons.area_chart))),
-                            Expanded(
-                                flex: 2,
-                                child: Align(
-                                    alignment: Alignment.centerLeft,
-                                    child: Text(
-                                      'YTd Dashboard',
-                                      style: TextStyle(
-                                        letterSpacing: 3.0,
-                                      ),
-                                    ))),
-                          ]),
-                          onTap: () {
-                            Provider.of(context).navigateToScreen(6);
-                          },
-                        ),
-                        SizedBox(height: itemSpacing),
-                      ],
-                    )),
-                SizedBox(height: itemSpacing),
-                ListTile(
-                  hoverColor: Colors.white,
-                  title: Row(children: const [
-                    Expanded(
-                        flex: 1,
-                        child: Align(
-                            alignment: Alignment.centerRight,
-                            child: Icon(Icons.settings))),
-                    Expanded(
-                        flex: 2,
-                        child: Align(
-                            alignment: Alignment.centerLeft,
-                            child: Text(
-                              'Settings',
-                              style: TextStyle(
-                                letterSpacing: 3.0,
-                              ),
-                            ))),
-                  ]),
-                  onTap: () {
-                    Provider.of(context).navigateToScreen(3);
-                  },
-                ),
-                SizedBox(height: itemSpacing),
-              ],
-            ),
-          ),
-          SizedBox(height: screenHeight * 0.14),
-          // add 20% of screen height from bottom
-        ],
-      ),*/
     );
   }
 }

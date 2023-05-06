@@ -3,71 +3,30 @@ import 'package:rxdart/rxdart.dart';
 import 'package:wellbeing/src/elements/consultation.dart';
 import 'package:wellbeing/src/elements/employee.dart';
 
+import '../elements/chart_data.dart';
 import '../elements/department.dart';
 import '../elements/incident.dart';
 import '../elements/period.dart';
 
 class Bloc extends Object {
 
-  List<Consultation> currentCsl = [Consultation(date:DateTime(2020,5,9),bilan: "Lorem ")];//[Consultation(date:DateTime(2020,5,9),bilan: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."),Consultation(date: DateTime(2021,9,18),bilan: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."),Consultation(date: DateTime(2022,8,26),bilan: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.")];
+  List<Consultation> currentCsl = [/*Consultation(date:DateTime(2020,5,9),bilan: "Lorem ")*/];//[Consultation(date:DateTime(2020,5,9),bilan: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."),Consultation(date: DateTime(2021,9,18),bilan: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."),Consultation(date: DateTime(2022,8,26),bilan: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.")];
   //List<bool> currentExpand = [false,false,false];
   int currentIndex = 0;
-  Employee currentEmployee = Employee(firstName: "James",lastName: "Rodriguez", department: "Production", stress: 0, anxiety: 1, fatigue: 0,num: 286544452,
-      email: "james.james@gmail.com",job: "Manager",workHours:36,birthDate: DateTime(1980,5,20),recDate: DateTime(2019,2,23));
-  List<Employee> currentList = [
-    Employee(firstName: "Jhon",lastName:"Rodriguez",department: "Marketing",stress:1,anxiety: 2,fatigue: 0,email: "jhon.james@gmail.com",job: "Manager",workHours:36,birthDate: DateTime(1980,5,20),recDate: DateTime(2019,2,23),num: 28664020),
-    Employee(firstName: "Kevin",lastName:"Rodriguez",department: "Production",stress: 0,anxiety: 0,fatigue: 1,email: "kevin.james@gmail.com",job: "Manager",workHours:36,birthDate: DateTime(1980,5,20),recDate: DateTime(2019,2,23),num: 25668744),
-    Employee(firstName: "Emma",lastName:"Rodriguez",department: "Marketing",stress: 1,anxiety: 0,fatigue: 2,email: "emma.james@gmail.com",job: "Developer",workHours:36,birthDate: DateTime(1980,5,20),recDate: DateTime(2019,2,23),num: 55870099),
-    Employee(firstName: "James",lastName:"Rodriguez",department: "Finance",stress: 1,anxiety: 0,fatigue: 2,email: "james.james@gmail.com",job: "Engineer",workHours:36,birthDate: DateTime(1980,5,20),recDate: DateTime(2019,2,23),num: 92050886),
-    Employee(firstName: "Fred",lastName:"Rodriguez",department: "Finance",stress: 1,anxiety: 0,fatigue: 2,email: "fred.james@gmail.com",job: "Developer",workHours:36,birthDate: DateTime(1980,5,20),recDate: DateTime(2019,2,23),num: 99885020),
-    Employee(firstName: "Selena",lastName:"Rodriguez",department: "Marketing",stress: 1,anxiety: 0,fatigue: 2,email: "selena.james@gmail.com",job: "Manager",workHours:36,birthDate: DateTime(1980,5,20),recDate: DateTime(2019,2,23),num: 21741133),
-    Employee(firstName: "Adam",lastName:"Rodriguez",department: "Marketing",stress: 1,anxiety: 0,fatigue: 2,email: "adam.james@gmail.com",job: "Manager",workHours:36,birthDate: DateTime(1980,5,20),recDate: DateTime(2019,2,23),num: 52114189),
-  ];
-  Period currentPeriod = Period(departments: [
-    Department(stress: {"Flutter": 75}, anxiety: {"anxiety":15}, fatigue: {"fatigue":10}),
-    Department(stress: {"Flutter": 4}, anxiety: {"anxiety":18}, fatigue: {"fatigue":2}),
-    Department(stress: {"Flutter": 7}, anxiety: {"anxiety":20}, fatigue: {"fatigue":9})
-  ], incidents: [
-    Incident("faible", 10),
-    Incident("Moyen", 20),
-    Incident("Severe", 15),
-    Incident("Critique", 2)
-  ], daysOff: [
-    Incident("Santé", 10),
-    Incident("Emotionelle", 20),
-    Incident("Incidents", 12)
-  ]);
+  Employee currentEmployee = Employee();
+  List<Employee> currentList=[] ;
+  Period currentPeriod = Period(departments: [],daysOff: [],incidents: []);
 
 
-  final _cslController = BehaviorSubject<List<Consultation>>.seeded([Consultation(date:DateTime(2020,5,9),bilan: "Lorem ")]);//[Consultation(date:DateTime(2020,5,9),bilan: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."),Consultation(date: DateTime(2021,9,18),bilan: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."),Consultation(date: DateTime(2022,8,26),bilan: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.")]);
-  final _expandedController = BehaviorSubject<List<bool>>.seeded([false,false,false]);
+  final _cslController = BehaviorSubject<List<Consultation>>.seeded([]);//[Consultation(date:DateTime(2020,5,9),bilan: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."),Consultation(date: DateTime(2021,9,18),bilan: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."),Consultation(date: DateTime(2022,8,26),bilan: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.")]);
+  //final _expandedController = BehaviorSubject<List<bool>>.seeded([]);
   final _screenController = BehaviorSubject<int>.seeded(0);
-  final _employeeController = BehaviorSubject<Employee>.seeded(Employee(firstName: "James Rodriguez",lastName: "Rodriguez", department: "Production", stress: 0, anxiety: 1, fatigue: 0,num: 286544452,
-    email: "james.james@gmail.com",job: "Manager",workHours:36,birthDate: DateTime(1980,5,20),recDate: DateTime(2019,2,23)));
-  final _listController = BehaviorSubject<List<Employee>>.seeded([
-    Employee(firstName: "Jhon",lastName:"Rodriguez",department: "Marketing",stress:1,anxiety: 2,fatigue: 0,email: "jhon.james@gmail.com",job: "Manager",workHours:36,birthDate: DateTime(1980,5,20),recDate: DateTime(2019,2,23),num: 28664020),
-    Employee(firstName: "Kevin",lastName:"Rodriguez",department: "Production",stress: 0,anxiety: 0,fatigue: 1,email: "kevin.james@gmail.com",job: "Manager",workHours:36,birthDate: DateTime(1980,5,20),recDate: DateTime(2019,2,23),num: 25668744),
-    Employee(firstName: "Emma",lastName:"Rodriguez",department: "Marketing",stress: 1,anxiety: 0,fatigue: 2,email: "emma.james@gmail.com",job: "Developer",workHours:36,birthDate: DateTime(1980,5,20),recDate: DateTime(2019,2,23),num: 55870099),
-    Employee(firstName: "James",lastName:"Rodriguez",department: "Finance",stress: 1,anxiety: 0,fatigue: 2,email: "james.james@gmail.com",job: "Engineer",workHours:36,birthDate: DateTime(1980,5,20),recDate: DateTime(2019,2,23),num: 92050886),
-    Employee(firstName: "Fred",lastName:"Rodriguez",department: "Finance",stress: 1,anxiety: 0,fatigue: 2,email: "fred.james@gmail.com",job: "Developer",workHours:36,birthDate: DateTime(1980,5,20),recDate: DateTime(2019,2,23),num: 99885020),
-    Employee(firstName: "Selena",lastName:"Rodriguez",department: "Marketing",stress: 1,anxiety: 0,fatigue: 2,email: "selena.james@gmail.com",job: "Manager",workHours:36,birthDate: DateTime(1980,5,20),recDate: DateTime(2019,2,23),num: 21741133),
-    Employee(firstName: "Adam",lastName:"Rodriguez",department: "Marketing",stress: 1,anxiety: 0,fatigue: 2,email: "adam.james@gmail.com",job: "Manager",workHours:36,birthDate: DateTime(1980,5,20),recDate: DateTime(2019,2,23),num: 52114189),
-  ]);
-  final _periodController = BehaviorSubject<Period>.seeded(Period(departments: [
-    Department(stress: {"Flutter": 75}, anxiety: {"anxiety":15}, fatigue: {"fatigue":10}),
-    Department(stress: {"Flutter": 4}, anxiety: {"anxiety":18}, fatigue: {"fatigue":2}),
-    Department(stress: {"Flutter": 7}, anxiety: {"anxiety":20}, fatigue: {"fatigue":9})
-  ], incidents: [
-    Incident("faible", 10),
-    Incident("Moyen", 20),
-    Incident("Severe", 15),
-    Incident("Critique", 2)
-  ], daysOff: [
-    Incident("Santé", 10),
-    Incident("Emotionelle", 20),
-    Incident("Incidents", 12)
-  ]));
-  Stream<List<bool>> get expandeds => _expandedController.stream;
+  final _employeeController = BehaviorSubject<Employee>.seeded(Employee());
+  final _listController = BehaviorSubject<List<Employee>>.seeded([]);
+  final _periodController = BehaviorSubject<Period>.seeded(Period(departments:[], incidents:[], daysOff:[]));
+
+
+  //Stream<List<bool>> get expandeds => _expandedController.stream;
   Stream<int> get screens => _screenController.stream;
   Stream<Employee> get employees => _employeeController.stream;
   Stream<List<Employee>> get lists => _listController.stream;
@@ -78,12 +37,26 @@ class Bloc extends Object {
     currentIndex = index;
     _screenController.sink.add(currentIndex);
   }
-  void pushEmployee(Employee employee,) {
+  void pushEmployee(Employee e){
+    currentList.add(e);
+    _listController.sink.add(currentList);
+  }
+  void popEmployee(Employee e){
+    currentList.remove(e);
+    _listController.sink.add(currentList);
+  }
+  void selectEmployee(Employee employee,) {
     currentEmployee = employee;
     _employeeController.sink.add(currentEmployee);
   }
-  void pushList(List<Employee> empp,) {
-    currentList = empp;
+  void pushList(List<Employee> empList,) {
+    currentList = empList;
+    for (Employee e in currentList){
+      if(e.csl == null) continue;
+      for(Consultation c in e.csl!){
+        c.isExpanded =false;
+      }
+    }
     _listController.sink.add(currentList);
   }
   void pushPeriod(Period period,) {

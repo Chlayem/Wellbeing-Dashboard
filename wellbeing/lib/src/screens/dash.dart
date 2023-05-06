@@ -1,15 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:wellbeing/src/blocs/provider.dart';
-
+import 'package:wellbeing/src/elements/consultation.dart';
+import 'package:intl/intl.dart';
 import '../elements/employee.dart';
 
 class Dash extends StatelessWidget {
   final List<Employee> emp;
   Dash({required this.emp});
 
-  Icon setColor(int i){
+  Icon setColor(int? i){
     Color c=Colors.green;
+    if(i==null)return Icon(Icons.circle,size: 8,);
     switch(i){
+      case -1:
+        c=Colors.grey;
+        break;
       case 0:
         c = Colors.green;
         break;
@@ -33,7 +38,7 @@ class Dash extends StatelessWidget {
       if(entredKeyword.isEmpty){
         result=emp;
       }else{
-        result=emp.where((e) => e.firstName.toLowerCase().contains(entredKeyword.toLowerCase())).toList();
+        result=emp.where((e) => e.firstName!.toLowerCase().contains(entredKeyword.toLowerCase())).toList();
       }
       Provider.of(context).pushList(result);
     }
@@ -57,6 +62,7 @@ class Dash extends StatelessWidget {
         child: Column(
           children: [
             Container(
+              padding: EdgeInsets.symmetric(vertical: 10.0),
               width: searchWidth,
               child: TextField(
                 onChanged: (value) => runFilter(value),
@@ -64,6 +70,19 @@ class Dash extends StatelessWidget {
                     labelText: 'Search',
                     suffixIcon: Icon(Icons.search)
                 ),
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.symmetric(vertical: 10.0,horizontal: cardPadding),
+              child: Row(
+                children: const [
+                  Expanded(flex:2,child: SizedBox()),
+                  Expanded(flex:8,child: Text("Name")),
+                  Expanded(flex:8,child: Text("Last Consultation")),
+                  Expanded(flex:2,child: Text("Stress",)),
+                  Expanded(flex:2,child: Text("Anxiety")),
+                  Expanded(flex:2,child: Text("Fatigue")),
+                ],
               ),
             ),
             StreamBuilder<List<Employee>>(
@@ -75,37 +94,37 @@ class Dash extends StatelessWidget {
                     shrinkWrap: true,
                     itemCount: empFound.length,
                     itemBuilder: (context,index){
+                      DateTime? cslDate ;
+
+                      final csl = empFound[index].csl;
+                      if(csl != null){
+                        cslDate=csl.isNotEmpty ?csl.last.date:null;
+                      }
                       return Padding(
                         padding: EdgeInsets.symmetric(vertical: 1.0,horizontal: cardPadding),
                         child: Card(
                           child: ListTile(
                             onTap: (){
                               Employee e =empFound[index];
-                              Provider.of(context).pushEmployee(e);
+                              Provider.of(context).selectEmployee(e);
                               Provider.of(context).pushCsl(e.csl??[]);
                               Provider.of(context).navigateToScreen(4);
 
                             },
                             title: Row(
                               children: [
-                                Expanded(child: Text(empFound[index].firstName)),
-                                Expanded(
-                                    child: Row(
-                                      children: [
-                                        Expanded(flex:6,child: Text(empFound[index].department)),
-                                        Expanded(child: setColor(empFound[index].stress)),
-                                        Expanded(child: setColor(empFound[index].anxiety)),
-                                        Expanded(child: setColor(empFound[index].fatigue))
-                                      ],
-                                    )
-                                ),
+                                Expanded(flex:8,child: Text('${empFound[index].firstName!} ${empFound[index].lastName!}')),
+                                Expanded(flex:8,child: Text(cslDate!=null?DateFormat('yyyy-MM-dd').format(cslDate!):"       -",)),
+                                Expanded(flex:2,child: setColor(empFound[index].stress.last.value)),
+                                Expanded(flex:2,child: setColor(empFound[index].anxiety.last.value)),
+                                Expanded(flex:2,child: setColor(empFound[index].fatigue.last.value)),
 
                               ],
                             ),
 
-                            //leading: CircleAvatar(
-                            //  backgroundImage: AssetImage("assets/${empFound[index].name}.jpg"),
-                            //),
+                            leading: CircleAvatar(
+                              backgroundImage: AssetImage("assets/Kevin.jpg"),
+                            ),
 
                           ),
 
@@ -123,7 +142,6 @@ class Dash extends StatelessWidget {
         ),
       ),
     );
-    throw UnimplementedError();
   }
 
 }

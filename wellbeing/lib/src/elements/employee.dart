@@ -1,20 +1,23 @@
 
+import 'package:wellbeing/src/elements/chart_data.dart';
+
 import 'consultation.dart';
 
 class Employee {
-  String firstName ;
-  String lastName;
+  String? firstName ;
+  String? lastName;
+  int? cin;
   String? email;
-  String job;
+  String? job;
   int? workHours;
   DateTime? birthDate;
   DateTime? recDate;
   int? num;
-  String department ;
-  int stress;
-  int anxiety;
-  int fatigue;
+  String? department ;
+  List<ChartData> stress;
+  List<ChartData> anxiety;
+  List<ChartData> fatigue;
   List<Consultation>? csl;
-  Employee({required this.firstName,required this.lastName,required this.department,required this.stress,required this.anxiety,required this.fatigue,
-    this.email,required this.job,this.workHours,this.birthDate,this.recDate,this.num,this.csl});
+  Employee({this.firstName, this.lastName,this.cin, this.department, this.stress=const[], this.anxiety=const[], this.fatigue=const[],
+    this.email, this.job,this.workHours,this.birthDate,this.recDate,this.num,this.csl});
 }

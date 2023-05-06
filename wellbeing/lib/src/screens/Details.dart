@@ -1,22 +1,27 @@
 
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:wellbeing/src/blocs/provider.dart';
 import 'package:wellbeing/src/elements/employee.dart';
 import 'package:wellbeing/src/elements/consultation.dart';
-
+import 'package:intl/intl.dart';
+import '../elements/chart_data.dart';
 import '../elements/consultation_form.dart';
+import '../elements/kpi_chart.dart';
 
 
 class Details extends StatelessWidget {
+
   @override
   Widget build(BuildContext context) {
     double screenWidth =MediaQuery.of(context).size.width;
     var columns = screenWidth > 500 ? 2:1;
+    var contentWidth = screenWidth > 900 ? screenWidth*0.5:screenWidth*0.9;
     //List<Widget> list =;
     //Widget colrow = screenWidth < 500.0 ? Row(children: list,) : Column(children: list,);
     //exp = csl.map((e) => e.isExpanded).toList();
 
-
+    double cardPadding= screenWidth /40;
 
     return StreamBuilder<Employee>(
       stream: Provider.of(context).employees,
@@ -29,17 +34,18 @@ class Details extends StatelessWidget {
               child: Column(
                   children: [
                     Padding(
-                      padding: const EdgeInsets.fromLTRB(20.0,20.0,20.0,10.0),
+                      padding:  EdgeInsets.fromLTRB(cardPadding,20.0,cardPadding,10.0),
                       child: Card(
+                        elevation: 10,
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: ListTile(
-                            //leading:CircleAvatar(
-                             // backgroundImage: AssetImage("assets/Kevin.jpg"),
-                            //),
+                            leading:CircleAvatar(
+                              backgroundImage: AssetImage("assets/Kevin.jpg"),
+                            ),
                             title: Row(
                               children: [
-                                Expanded(child: Text(employee.firstName)),
+                                Expanded(child: Text(employee.firstName!,style: GoogleFonts.varelaRound(),)),
                                 TextButton.icon(
                                   onPressed: (){},
                                   icon: Icon(Icons.calendar_month_rounded),
@@ -58,20 +64,24 @@ class Details extends StatelessWidget {
                       ),
                     Padding(
                       padding: const EdgeInsets.all(20.0),
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        //crossAxisCount: columns,
-                        children: [
-                          Expanded(
-                            child: Container(
+                      child: Container(
+                        width: contentWidth,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          //crossAxisCount: columns,
+                          children: [
+                            Text("Informations :",style: GoogleFonts.varelaRound(color: Color(0xff154F62),fontWeight: FontWeight.bold),),
+                            SizedBox(height: 20.0,),
+                            Container(
                               padding: EdgeInsets.symmetric(vertical: 20.0,horizontal: 20.0),
                               decoration: BoxDecoration(
+
                                 color:Colors.white,
                                 boxShadow: [
                                   BoxShadow(
                                     color: Colors.grey,
                                     blurRadius: 1.0, // soften the shadow
-                                    spreadRadius: 0.1, //extend the shadow
+                                    spreadRadius: 0.8, //extend the shadow
                                     offset: Offset(
                                       0, // Move to right 5  horizontally
                                       0, // Move to bottom 5 Vertically
@@ -83,7 +93,7 @@ class Details extends StatelessWidget {
                                 children: [
                                   Row(
                                     children: [
-                                      Expanded(flex:1,child: Text("Job",style: TextStyle(fontWeight: FontWeight.w100),)),
+                                      Expanded(flex:1,child: Text("Job",style: GoogleFonts.mulish(),)),
                                       Expanded(child: Text(": ${employee.job ?? "-"}",))
                                     ],
                                   ),
@@ -120,9 +130,9 @@ class Details extends StatelessWidget {
                                 ],
                               ),
                             ),
-                          ),
-                          Expanded(
-                            child: Column(
+                            SizedBox(height: 20.0,),
+                            Text("Consultations :",style: TextStyle(color: Color(0xff154F62),fontWeight: FontWeight.bold),),
+                            Column(
                               children: [
                                 StreamBuilder<List<Consultation>>(
                                   stream: Provider.of(context).consultations,
@@ -141,7 +151,7 @@ class Details extends StatelessWidget {
                                                 title: Row(
                                                   children: [
                                                     Expanded(child: Text("Date de consultation :"),flex: 2,),
-                                                    Expanded(child: Text("${csl[i].date.year}-${csl[i].date.month}-${csl[i].date.day} "))
+                                                    Expanded(child: Text(DateFormat('yyyy-MM-dd').format(csl[i].date)))
                                                   ],
                                                 ),
                                                 onExpansionChanged: (expanded){
@@ -172,7 +182,36 @@ class Details extends StatelessWidget {
 
                               ],
                             ),
-                          )],
+                            Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 30.0,horizontal:20.0),
+                              child: KpiChart(
+                                chartData: employee.stress,
+                                title: 'Stress',
+                                xValueMapper: (ChartData data) => data.month,
+                                yValueMapper: (ChartData data, int _) => data.value,
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 30.0,horizontal:20.0),
+                              child: KpiChart(
+                                chartData: employee.anxiety,
+                                title: 'Anxiety',
+                                xValueMapper: (ChartData data) => data.month,
+                                yValueMapper: (ChartData data, int _) => data.value,
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 30.0,horizontal:20.0),
+                              child: KpiChart(
+                                chartData: employee.fatigue,
+                                title: 'Fatigue',
+                                xValueMapper: (ChartData data) => data.month,
+                                yValueMapper: (ChartData data, int _) => data.value,
+                              ),
+                            ),
+
+                          ],
+                        ),
                       ),
                     ),
                   ],
