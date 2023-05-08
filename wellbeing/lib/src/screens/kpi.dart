@@ -161,56 +161,97 @@ class _KPIState extends State<KPI> {
                     SizedBox(
                       height: 100,
                     ),
-                    GridView.count(
-                      childAspectRatio: 1.2,
-                      crossAxisSpacing: 10,
-                      shrinkWrap: true,
-                      crossAxisCount: screenWidth>600?3:1,
-                      children: [
-                        // Bar Chart 1
-                        Padding(
-                          padding: EdgeInsets.symmetric(horizontal: chartPaddingHorizantal,vertical:chartPaddingVertical),
+                    LayoutBuilder(
+                        builder: (context, constraints) {
+                          bool isWideScreen = constraints.maxWidth > 600;
 
-                          child: construireGraphiqueBarres('Severity', [
-                            BarChartData('Low', 1, 4, Colors.teal),
-                            BarChartData('Medium', 2, 3, Colors.orange),
-                            BarChartData('High', 3, 2, Colors.brown),
-                            BarChartData(
-                                'Critical', 4, 5, Colors.deepOrange)
-                          ]),
-                        ),
-                        // Bar Chart 2
-                        Padding(
-                          padding: EdgeInsets.symmetric(horizontal: chartPaddingHorizantal,vertical:chartPaddingVertical),
+                          return Column(
+                              children: [
+                                // Bar Chart 1, Bar Chart 2, et Bar Chart 3
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                  children: [
+                                    Expanded(
+                                      child: Padding(
+                                        padding: const EdgeInsets.fromLTRB(8.0, 25, 8.0, 0),
+                                        child: construireGraphiqueBarres('Severity', [
+                                          BarChartData('Low', 1, 4, Colors.teal),
+                                          BarChartData('Medium', 2, 3, Colors.orange),
+                                          BarChartData('High', 3, 2, Colors.brown),
+                                          BarChartData('Critical', 4, 5, Colors.deepOrange)
+                                        ]),
+                                      ),
+                                    ),
+                                    if (isWideScreen)
+                                      Expanded(
+                                        child: Padding(
+                                          padding: const EdgeInsets.fromLTRB(8.0, 25, 8.0, 0),
+                                          child: construireGraphiqueBarres('Type Of Incident', [
+                                            BarChartData('Injury', 1, 4, Colors.teal),
+                                            BarChartData('Illness', 2, 3, Colors.orange),
+                                            BarChartData('Psychological', 3, 2, Colors.brown),
+                                            BarChartData('Harrasment', 4, 5, Colors.deepOrange),
+                                            BarChartData('Other', 4, 7, Colors.deepPurple)
+                                          ]),
+                                        ),
+                                      ),
+                                    if (isWideScreen)
+                                      Expanded(
+                                        child: Padding(
+                                          padding: const EdgeInsets.fromLTRB(8.0, 25, 8.0, 0),
+                                          child: construireGraphiqueBarres('Injury Consequence', [
+                                            BarChartData('Lost Time', 1, 1, Colors.teal),
+                                            BarChartData('Medical Case', 2, 3, Colors.orange),
+                                            BarChartData('First Aid', 3, 2, Colors.brown),
+                                            BarChartData('No Treatment', 4, 5, Colors.deepOrange),
+                                            BarChartData('Lost Days', 4, 7, Colors.deepPurple)
+                                          ]),
+                                        ),
+                                      ),
+                                  ],
+                                ),
+                                if (!isWideScreen)
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                    children: [
+                                      Expanded(
+                                        child: Padding(
+                                          padding: const EdgeInsets.fromLTRB(8.0, 25, 8.0, 0),
+                                          child: construireGraphiqueBarres('Type Of Incident', [
+                                            BarChartData('Injury', 1, 4, Colors.teal),
+                                            BarChartData('Illness', 2, 3, Colors.orange),
+                                            BarChartData('Psychological', 3, 2, Colors.brown),
+                                            BarChartData('Harrasment', 4, 5, Colors.deepOrange),
+                                            BarChartData('Other', 4, 7, Colors.deepPurple),
+                                          ]),
+                                        ),
+                                      ),
 
-                          child: construireGraphiqueBarres(
-                              'Type Of Incident', [
-                            BarChartData('Injury', 1, 4, Colors.teal),
-                            BarChartData('Illness', 2, 3, Colors.orange),
-                            BarChartData(
-                                'Psychological', 3, 2, Colors.brown),
-                            BarChartData(
-                                'Harrasment', 4, 5, Colors.deepOrange),
-                            BarChartData('Other', 4, 7, Colors.deepPurple)
-                          ]),
-                        ),
-                        // Bar Chart 3
-                        Padding(
-                          padding: EdgeInsets.symmetric(horizontal: chartPaddingHorizantal,vertical:chartPaddingVertical),
 
-                          child: construireGraphiqueBarres(
-                              'Injury Consequence', [
-                            BarChartData('Lost Time', 1, 1, Colors.teal),
-                            BarChartData(
-                                'Medical Case', 2, 3, Colors.orange),
-                            BarChartData('First Aid', 3, 2, Colors.brown),
-                            BarChartData(
-                                'No Treatment', 4, 5, Colors.deepOrange),
-                            BarChartData(
-                                'Lost Days', 4, 7, Colors.deepPurple)
-                          ]),
-                        ),
-                      ],
+                                    ],
+                                  ),
+                               /* Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                  children: [
+                                    Expanded(
+                                      child: Padding(
+                                        padding: const EdgeInsets.fromLTRB(8.0, 25, 8.0, 0),
+                                        child: construireGraphiqueBarres('Injury Consequence', [
+                                          BarChartData('Lost Time', 1, 1, Colors.teal),
+                                          BarChartData('Medical Case', 2, 3, Colors.orange),
+                                          BarChartData('First Aid', 3, 2, Colors.brown),
+                                          BarChartData('No Treatment', 4, 5, Colors.deepOrange),
+                                          BarChartData('Lost Days', 4, 7, Colors.deepPurple)
+                                        ]),
+                                      ),
+                                    ),
+                                  ],
+                                ),*/
+                              ]
+
+                          );
+                        }
+
                     ),
                     SizedBox(height: 100,)
                   ],

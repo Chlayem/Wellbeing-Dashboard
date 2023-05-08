@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:wellbeing/src/blocs/provider.dart';
+import 'package:wellbeing/src/elements/chart_data.dart';
 import 'package:wellbeing/src/elements/employee.dart';
 import 'package:wellbeing/src/elements/consultation.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:wellbeing/src/elements/kpi_chart.dart';
 import '../elements/consultation_form.dart';
 
 
@@ -257,10 +259,40 @@ class Details extends StatelessWidget {
                                 child: ConsultationForm(),
                               ),
                               SizedBox(height: 20.0),
+                              Padding(
+                                padding: const EdgeInsets.symmetric(vertical: 30.0,horizontal:20.0),
+                                child: KpiChart(
+                                  chartData: employee.stress,
+                                  title: 'Stress',
+                                  xValueMapper: (ChartData data) => data.month,
+                                  yValueMapper: (ChartData data, int _) => data.value,
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.symmetric(vertical: 30.0,horizontal:20.0),
+                                child: KpiChart(
+                                  chartData: employee.anxiety,
+                                  title: 'Anxiety',
+                                  xValueMapper: (ChartData data) => data.month,
+                                  yValueMapper: (ChartData data, int _) => data.value,
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.symmetric(vertical: 30.0,horizontal:20.0),
+                                child: KpiChart(
+                                  chartData: employee.fatigue,
+                                  title: 'Fatigue',
+                                  xValueMapper: (ChartData data) => data.month,
+                                  yValueMapper: (ChartData data, int _) => data.value,
+                                ),
+                              ),
                             ],
+
                           ),
                         ),
                       ),
+
+
                     ],
                   ),
                 ),
@@ -270,6 +302,7 @@ class Details extends StatelessWidget {
             }
           }
       ),
+
     );
   }
 }
