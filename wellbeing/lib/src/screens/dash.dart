@@ -123,7 +123,7 @@ class Dash extends StatelessWidget {
                             ),
 
                             leading: CircleAvatar(
-                              backgroundImage: AssetImage("assets/Kevin.jpg"),
+                              backgroundImage: AssetImage("assets/${empFound[index].firstName}.jpg"),
                             ),
 
                           ),

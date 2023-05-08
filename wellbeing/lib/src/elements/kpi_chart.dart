@@ -25,28 +25,26 @@ class KpiChart extends StatelessWidget {
       builder: (BuildContext context, SizingInformation sizingInformation) {
         bool isMobile = sizingInformation.deviceScreenType == DeviceScreenType.mobile;
 
-        return Expanded(
-          child: SizedBox(
-            height: 150,
-            child: SfCartesianChart(
-              plotAreaBorderColor: Colors.transparent,
-              primaryXAxis: CategoryAxis(
-                labelRotation: isMobile ? -45 : 0,
-                title: AxisTitle(
-                  text: title,
-                  textStyle: TextStyle(fontWeight: FontWeight.bold),
-                ),
+        return SizedBox(
+          height: 150,
+          child: SfCartesianChart(
+            plotAreaBorderColor: Colors.transparent,
+            primaryXAxis: CategoryAxis(
+              labelRotation: isMobile ? -45 : 0,
+              title: AxisTitle(
+                text: title,
+                textStyle: TextStyle(fontWeight: FontWeight.bold),
               ),
-              primaryYAxis: NumericAxis(isVisible: false),
-              backgroundColor: Colors.grey[200],
-              series: <LineSeries<ChartData, String>>[
-                LineSeries<ChartData, String>(
-                  dataSource: chartData,
-                  xValueMapper: (ChartData data, _) => xValueMapper(data),
-                  yValueMapper: yValueMapper,
-                ),
-              ],
             ),
+            primaryYAxis: NumericAxis(isVisible: false),
+            backgroundColor: Colors.grey[200],
+            series: <LineSeries<ChartData, String>>[
+              LineSeries<ChartData, String>(
+                dataSource: chartData,
+                xValueMapper: (ChartData data, _) => xValueMapper(data),
+                yValueMapper: yValueMapper,
+              ),
+            ],
           ),
         );
       },

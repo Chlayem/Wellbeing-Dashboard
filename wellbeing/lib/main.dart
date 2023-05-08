@@ -6,6 +6,6 @@ import 'src/blocs/provider.dart';
 
 void main() {
   runApp(Provider(
-    child: MediaQuery(data: MediaQueryData(),child: Th()),
+    child: MediaQuery(data: MediaQueryData(),child: App()),
   ));
 }

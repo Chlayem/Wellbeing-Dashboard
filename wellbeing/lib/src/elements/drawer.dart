@@ -24,7 +24,7 @@ class _DraweerState extends State<Draweer> {
             padding: EdgeInsets.symmetric(horizontal: 10.0,vertical: 40.0),
             child: ListTile(
               leading: CircleAvatar(
-                backgroundImage: AssetImage("assets/Jhon.jpg"),
+                backgroundImage: AssetImage("assets/James.jpg"),
               ),
               title: Text("James Rodriguez",style: TextStyle(color: Colors.white,),),
               subtitle: Text("Responsable ressources humaines",style: TextStyle(color: Colors.grey),),

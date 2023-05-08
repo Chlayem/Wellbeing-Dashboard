@@ -54,10 +54,12 @@ class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    double width = MediaQuery.of(context).size.width;
-    double height = MediaQuery.of(context).size.height;
-    int pieChartCount=width>700 ?3:1;
-    double pieChartRatio = width > 700? 1.65: width/3/50;
+    double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
+    int pieChartCount=screenWidth>700 ?3:1;
+    double pieChartRatio = screenWidth > 700? 1.5: screenWidth/200;
+    double chartPaddingHorizantal = screenWidth <600 ? screenWidth*0.1:screenWidth*0.05;
+    double chartPaddingVertical = screenWidth <600 ? 50.0:screenWidth*0.06;
 
     return Container(
         color: Color(0xffEFF5F5),
@@ -232,7 +234,7 @@ class Home extends StatelessWidget {
                                   flex: 4,
                                   child: Padding(
                                       padding: EdgeInsets.only(
-                                          top: height * .01),
+                                          top: screenHeight * .01),
                                       child: Text(p.departments[i].name,
                                           style: TextStyle(
                                               color: Colors.teal,
@@ -345,9 +347,9 @@ class Home extends StatelessWidget {
                             flex: 1,
                             child: Padding(
                                 padding: EdgeInsets.only(
-                                    top: height * 0.05,
-                                    left: width * 0.07,
-                                    right: width * 0.05),
+                                    top: screenHeight * 0.05,
+                                    left: screenWidth * 0.07,
+                                    right: screenWidth * 0.05),
                                 child: Container(
                                   height: 70,
                                     decoration: BoxDecoration(
@@ -358,9 +360,9 @@ class Home extends StatelessWidget {
                             flex: 1,
                             child: Padding(
                                 padding: EdgeInsets.only(
-                                    top: height * 0.05,
-                                    left: width * 0.035,
-                                    right: width * .085),
+                                    top: screenHeight * 0.05,
+                                    left: screenWidth * 0.035,
+                                    right: screenWidth * .085),
                                 child: Container(
                                     height: 70,
                                     decoration: BoxDecoration(
@@ -371,7 +373,7 @@ class Home extends StatelessWidget {
                             flex: 1,
                             child: Padding(
                                 padding: EdgeInsets.only(
-                                    top: height * 0.05, right: width * 0.12),
+                                    top: screenHeight * 0.05, right: screenWidth * 0.12),
                                 child: Container(
                                     height: 70,
                                     decoration: BoxDecoration(
@@ -381,15 +383,12 @@ class Home extends StatelessWidget {
                       ]),
                       GridView.count(
                         childAspectRatio: 1.2,
-                        crossAxisSpacing: 30,
+                        crossAxisSpacing: 10,
                         shrinkWrap: true,
-                        crossAxisCount: width>500?2:1,
+                        crossAxisCount: screenWidth>600?2:1,
                           children: [
                             Container(
-                              padding: EdgeInsets.only(
-                                  top: height * 0.035,
-                                  right: 0.02 * width,
-                                  left: width * 0.06),
+                              padding: EdgeInsets.symmetric(horizontal: chartPaddingHorizantal,vertical:chartPaddingVertical),
                               child: SfCartesianChart(
                                 plotAreaBackgroundColor: Color(0xffEFF5F5),
                                 primaryXAxis: CategoryAxis(),
@@ -410,15 +409,14 @@ class Home extends StatelessWidget {
                               ),
                             ),
                             Container(
-                              padding: EdgeInsets.only(
-                                  right: width * 0.09, top: height * 0.035),
+                              padding: EdgeInsets.symmetric(horizontal: chartPaddingHorizantal,vertical:chartPaddingVertical),
                               child: SfCartesianChart(
                                 primaryXAxis: CategoryAxis(
                                   labelStyle: TextStyle(fontSize: 10),
                                 ),
                                 primaryYAxis: NumericAxis(
                                   minimum: 0,
-                                  maximum: 33,
+                                  //maximum: 33,
                                   labelStyle: TextStyle(
                                       fontSize:10),
                                   rangePadding: ChartRangePadding.none,

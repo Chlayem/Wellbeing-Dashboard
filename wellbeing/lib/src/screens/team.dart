@@ -201,7 +201,7 @@ class Crud extends StatelessWidget {
                                     ),
 
                                     leading: CircleAvatar(
-                                      backgroundImage: AssetImage("assets/Jhon.jpg"),
+                                      backgroundImage: AssetImage("assets/${empFound[index].firstName}.jpg"),
                                     ),
 
                                   ),

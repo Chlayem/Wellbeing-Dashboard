@@ -9,8 +9,24 @@ import '../elements/consultation_form.dart';
 class Details extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    double screenHeigth=MediaQuery.of(context).size.height;
     double screenWidth =MediaQuery.of(context).size.width;
-    var columns = screenWidth > 500 ? 2:1;
+    //var columns = screenWidth > 500 ? 2:1;
+    double cardPadding;
+    double buttonFontSize ;
+    double nameFontSize;
+    if(screenWidth<600){
+      nameFontSize=16;
+      buttonFontSize=12;
+      cardPadding=5;
+
+    }else{
+      nameFontSize=21;
+      buttonFontSize=18;
+      cardPadding=screenWidth/40;
+
+    }
+
     //List<Widget> list =;
     //Widget colrow = screenWidth < 500.0 ? Row(children: list,) : Column(children: list,);
     //exp = csl.map((e) => e.isExpanded).toList();
@@ -31,67 +47,59 @@ class Details extends StatelessWidget {
                     children: [
                       Padding(
                         padding: const EdgeInsets.fromLTRB(20.0,20.0,20.0,10.0),
-                        child: Container(
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(8)),
-                          child: Card(
-                            elevation: 8,
-                            color: Color(0xffffffff),
-                            child: Padding(
-                              padding: const EdgeInsets.all(20.0),
-                              child: ListTile(
-                                leading:Container(
-                                  height: 40,
-                                  width: 40,
-                                  child: CircleAvatar(
-                                    backgroundImage: AssetImage("assets/Kevin.jpg"),
-                                  ),
-                                ),
-                                title: Row(
-                                  children: [
-                                    Expanded(child: Text('${employee.firstName!} ${employee.lastName!}',style:GoogleFonts.mulish(fontWeight:FontWeight.w700,letterSpacing:1,color: Color(0xff002966),fontSize: 21))),
-                                    ClipRRect(
-                                      borderRadius: BorderRadius.circular(40),
-                                      child: TextButton.icon(
-                                        style: ButtonStyle(
-                                          padding: MaterialStateProperty.all<EdgeInsetsGeometry>(EdgeInsets.symmetric(horizontal: 16,vertical: 16)),
-                                          backgroundColor: MaterialStateProperty.resolveWith<Color>(
-                                                (Set<MaterialState> states) {
-                                              if (states.contains(MaterialState.hovered)) {
-                                                return Color(0xffbbbbbb);
-                                              }
-                                              return Color(0xffdcdcdc); // default color
-                                            },
-                                          ),
-                                          foregroundColor: MaterialStateProperty.all<Color>(Color(0xff002966)),
+                        child: Card(
+                          elevation: 8,
+                          color: Color(0xffffffff),
+                          child: Padding(
+                            padding: EdgeInsets.symmetric(vertical: 20.0,horizontal: cardPadding),
+                            child: ListTile(
+                              leading:CircleAvatar(
+                                backgroundImage: AssetImage("assets/${employee.firstName}.jpg"),
+                              ),
+                              title: Row(
+                                children: [
+                                  Expanded(child: Text('${employee.firstName!} ${employee.lastName!}',style:GoogleFonts.mulish(fontWeight:FontWeight.w700,letterSpacing:1,color: Color(0xff002966),fontSize: nameFontSize))),
+                                  ClipRRect(
+                                    borderRadius: BorderRadius.circular(40),
+                                    child: TextButton.icon(
+                                      style: ButtonStyle(
+                                        padding: MaterialStateProperty.all<EdgeInsetsGeometry>(EdgeInsets.symmetric(horizontal: screenWidth*0.02,vertical: screenHeigth*0.025)),
+                                        backgroundColor: MaterialStateProperty.resolveWith<Color>(
+                                              (Set<MaterialState> states) {
+                                            if (states.contains(MaterialState.hovered)) {
+                                              return Color(0xffbbbbbb);
+                                            }
+                                            return Color(0xffdcdcdc); // default color
+                                          },
                                         ),
-                                        onPressed: (){},
-                                        icon: Icon(Icons.calendar_month_rounded),
-                                        label: Text("Fix a meet",style:GoogleFonts.mulish(fontWeight:FontWeight.w400,letterSpacing:1)),
+                                        foregroundColor: MaterialStateProperty.all<Color>(Color(0xff002966)),
                                       ),
+                                      onPressed: (){},
+                                      icon: Icon(Icons.calendar_month_rounded,size: buttonFontSize,),
+                                      label: Text("Fix a meet",style:GoogleFonts.mulish(fontSize:buttonFontSize,fontWeight:FontWeight.w400,letterSpacing:1)),
                                     ),
-                                    Padding(padding: EdgeInsets.only(right: 8)),
-                                    ClipRRect(
-                                      borderRadius: BorderRadius.circular(40),
-                                      child: TextButton.icon(
-                                          style: ButtonStyle(
-                                              padding: MaterialStateProperty.all<EdgeInsetsGeometry>(EdgeInsets.symmetric(horizontal: 16,vertical: 16)),
-                                              backgroundColor: MaterialStateProperty.resolveWith<Color>(
-                                                    (Set<MaterialState> states) {
-                                                  if (states.contains(MaterialState.hovered)) {
-                                                    return Color(0xff002966);
-                                                  }
-                                                  return Color(0xff00559a); // default color
-                                                },
-                                              ),
-                                              foregroundColor: MaterialStateProperty.all<Color>(Color(0xffdcdcdc))),
-                                          onPressed: (){},
-                                          icon: Icon(Icons.notification_add),
-                                          label: Text("Notify",style:GoogleFonts.mulish(fontWeight:FontWeight.w400,letterSpacing:1))
-                                      ),
-                                    )
-                                  ],
-                                ),
+                                  ),
+                                  Padding(padding: EdgeInsets.only(right: 8)),
+                                  ClipRRect(
+                                    borderRadius: BorderRadius.circular(40),
+                                    child: TextButton.icon(
+                                        style: ButtonStyle(
+                                            padding: MaterialStateProperty.all<EdgeInsetsGeometry>(EdgeInsets.symmetric(horizontal: screenWidth*0.02,vertical: screenHeigth*0.025)),
+                                            backgroundColor: MaterialStateProperty.resolveWith<Color>(
+                                                  (Set<MaterialState> states) {
+                                                if (states.contains(MaterialState.hovered)) {
+                                                  return Color(0xff002966);
+                                                }
+                                                return Color(0xff00559a); // default color
+                                              },
+                                            ),
+                                            foregroundColor: MaterialStateProperty.all<Color>(Color(0xffdcdcdc))),
+                                        onPressed: (){},
+                                        icon: Icon(Icons.notification_add,size: buttonFontSize,),
+                                        label: Text("Notify",style:GoogleFonts.mulish(fontSize:buttonFontSize,fontWeight:FontWeight.w400,letterSpacing:1))
+                                    ),
+                                  )
+                                ],
                               ),
                             ),
                           ),
@@ -100,7 +108,7 @@ class Details extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.all(20.0),
                         child: Container(
-                          width: screenWidth*0.4,
+                          width: 600,
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             //crossAxisCount: columns,
@@ -128,39 +136,39 @@ class Details extends StatelessWidget {
                                   children: [
                                     Row(
                                       children: [
-                                        Expanded(flex:1,child: Text("Job",style: GoogleFonts.mulish(fontWeight:FontWeight.w300,letterSpacing:1 ,color: Color(0xff708090)))),
-                                        Expanded(child: Text(": ${employee.job ?? "-"}",
+                                        Expanded(flex:2,child: Text("Job",style: GoogleFonts.mulish(fontWeight:FontWeight.w300,letterSpacing:1 ,color: Color(0xff708090)))),
+                                        Expanded(flex:3,child: Text(": ${employee.job ?? "-"}",
                                             style: GoogleFonts.mulish(fontWeight:FontWeight.w500,letterSpacing:1 ,color: Color(0xff2F4F4F))))
                                       ],
                                     ),SizedBox(height: 10.0),
                                     Row(
                                       children: [
-                                        Expanded(child: Text("Email",style: GoogleFonts.mulish(fontWeight:FontWeight.w300,letterSpacing:1 ,color: Color(0xff708090)))),
-                                        Expanded(child: Text(": ${employee.email ?? "-"}",style: GoogleFonts.mulish(fontWeight:FontWeight.w500,letterSpacing:1 ,color: Color(0xff2F4F4F))))
+                                        Expanded(flex:2,child: Text("Email",style: GoogleFonts.mulish(fontWeight:FontWeight.w300,letterSpacing:1 ,color: Color(0xff708090)))),
+                                        Expanded(flex:3,child: Text(": ${employee.email ?? "-"}",style: GoogleFonts.mulish(fontWeight:FontWeight.w500,letterSpacing:1 ,color: Color(0xff2F4F4F))))
                                       ],
                                     ),SizedBox(height: 10.0),
                                     Row(
                                       children: [
-                                        Expanded(child: Text("Number",style:GoogleFonts.mulish(fontWeight:FontWeight.w300,letterSpacing:1 ,color: Color(0xff708090)))),
-                                        Expanded(child: Text(": ${employee.num ?? "-"}",style: GoogleFonts.mulish(fontWeight:FontWeight.w500,letterSpacing:1,color: Color(0xff2F4F4F) )))
+                                        Expanded(flex:2,child: Text("Number",style:GoogleFonts.mulish(fontWeight:FontWeight.w300,letterSpacing:1 ,color: Color(0xff708090)))),
+                                        Expanded(flex:3,child: Text(": ${employee.num ?? "-"}",style: GoogleFonts.mulish(fontWeight:FontWeight.w500,letterSpacing:1,color: Color(0xff2F4F4F) )))
                                       ],
                                     ),SizedBox(height: 10.0),
                                     Row(
                                       children: [
-                                        Expanded(child: Text("Birth date",style:GoogleFonts.mulish(fontWeight:FontWeight.w300,letterSpacing:1 ,color: Color(0xff708090)))),
-                                        Expanded(child: Text(": ${employee.birthDate?.day} - ${employee.birthDate?.month} - ${employee.birthDate?.year}",style: GoogleFonts.mulish(fontWeight:FontWeight.w500,letterSpacing:1,color: Color(0xff2F4F4F) )))
+                                        Expanded(flex:2,child: Text("Birth date",style:GoogleFonts.mulish(fontWeight:FontWeight.w300,letterSpacing:1 ,color: Color(0xff708090)))),
+                                        Expanded(flex:3,child: Text(": ${employee.birthDate?.day} - ${employee.birthDate?.month} - ${employee.birthDate?.year}",style: GoogleFonts.mulish(fontWeight:FontWeight.w500,letterSpacing:1,color: Color(0xff2F4F4F) )))
                                       ],
                                     ),SizedBox(height: 10.0),
                                     Row(
                                       children: [
-                                        Expanded(child: Text("Hiring date",style:GoogleFonts.mulish(fontWeight:FontWeight.w300,letterSpacing:1,color: Color(0xff708090) ))),
-                                        Expanded(child: Text(": ${employee.recDate?.day} - ${employee.recDate?.month} - ${employee.recDate?.year}",style: GoogleFonts.mulish(fontWeight:FontWeight.w500,letterSpacing:1 ,color: Color(0xff2F4F4F))))
+                                        Expanded(flex:2,child: Text("Hiring date",style:GoogleFonts.mulish(fontWeight:FontWeight.w300,letterSpacing:1,color: Color(0xff708090) ))),
+                                        Expanded(flex:3,child: Text(": ${employee.recDate?.day} - ${employee.recDate?.month} - ${employee.recDate?.year}",style: GoogleFonts.mulish(fontWeight:FontWeight.w500,letterSpacing:1 ,color: Color(0xff2F4F4F))))
                                       ],
                                     ),SizedBox(height: 10.0),
                                     Row(
                                       children: [
-                                        Expanded(child: Text("Working hours",style:GoogleFonts.mulish(fontWeight:FontWeight.w300,letterSpacing:1 ,color: Color(0xff708090)))),
-                                        Expanded(child: Text(": ${employee.workHours}",style: GoogleFonts.mulish(fontWeight:FontWeight.w500,letterSpacing:1 ,color: Color(0xff2F4F4F))))
+                                        Expanded(flex:2,child: Text("Working hours",style:GoogleFonts.mulish(fontWeight:FontWeight.w300,letterSpacing:1 ,color: Color(0xff708090)))),
+                                        Expanded(flex:3,child: Text(": ${employee.workHours}",style: GoogleFonts.mulish(fontWeight:FontWeight.w500,letterSpacing:1 ,color: Color(0xff2F4F4F))))
                                       ],
                                     ),
                                   ],
@@ -187,7 +195,7 @@ class Details extends StatelessWidget {
                                                   child: Container(
                                                     decoration: BoxDecoration(
                                                       borderRadius: BorderRadius.circular(8),
-                                                      color: Color(0xfff5f5f5),
+                                                      color: Colors.white,
                                                       boxShadow: [
                                                         BoxShadow(
                                                           color: Colors.grey,
