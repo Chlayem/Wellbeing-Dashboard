@@ -38,7 +38,7 @@ Widget construireGraphiqueBarres(String titre, List<BarChartData> donneesGraphiq
 
               primaryYAxis: NumericAxis(
                 minimum: 0, // Valeur minimale de l'axe Y
-                maximum: 100, // Valeur maximale de l'axe Y
+                //maximum: 100, // Valeur maximale de l'axe Y
                 interval: 10, // Intervalle entre les graduations de l'axe Y
               ),
 

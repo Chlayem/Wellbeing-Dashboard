@@ -37,11 +37,9 @@ Widget construireGraphiqueBarres(String titre, List<BarChartData> donneesGraphiq
 
               primaryYAxis: NumericAxis(
                 minimum: 0, // Valeur minimale de l'axe Y
-                maximum: 10, // Valeur maximale de l'axe Y
-                interval: 2, // Intervalle entre les graduations de l'axe Y
+                //maximum: 20, // Valeur maximale de l'axe Y
+                //interval: 2, // Intervalle entre les graduations de l'axe Y
               ),
-
-
               series: <ColumnSeries<BarChartData, String>>[
                 ColumnSeries<BarChartData, String>(
                   dataSource: donneesGraphiqueBarres,

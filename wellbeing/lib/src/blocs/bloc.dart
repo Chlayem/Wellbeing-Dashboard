@@ -266,6 +266,28 @@ class Bloc extends Object {
     currentCsl = csl;
     _cslController.sink.add(currentCsl);
   }
+
+
+  List<String> years = ['Fiscal Year','2019-20', '2020-21', '2021-22' ,'2022-23'];
+  List<String> months = ['Start Month','   Janvier', '   Février', '   Mars', '   Avril', '   Mai', '   Juin', '   Juillet', '   Août', '   Septembre', '   Octobre', '   Novembre', '   Décembre'];
+
+  final _selectedYear = BehaviorSubject<String>.seeded('Fiscal Year');
+  final _selectedMonth = BehaviorSubject<String>.seeded('Start Month');
+
+  Stream<String> get selectedYear => _selectedYear.stream;
+  Stream<String> get selectedMonth => _selectedMonth.stream;
+
+  void selectYear(String? newYear) {
+    if (newYear != null) {
+      _selectedYear.sink.add(newYear);
+    }
+  }
+
+  void selectMonth(String? newMonth) {
+    if (newMonth != null) {
+      _selectedMonth.sink.add(newMonth);
+    }
+  }
   void dispose() {
     _screenController.close();
     _employeeController.close();

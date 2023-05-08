@@ -41,60 +41,57 @@ class _KPIState extends State<KPI> {
               padding: EdgeInsets.only(top: 20),
               child: Align(
                 alignment: Alignment.center,
-                child: Table(
-                  border: TableBorder.all(color: Colors.grey),
-                  columnWidths: const {
-                    0: FixedColumnWidth(250.0),
-                    1: FixedColumnWidth(250.0),
-                  },
-                  children: [
-                    TableRow(
-                      decoration: BoxDecoration(color: Colors.grey[200]),
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(top: 15),
-                          child: Container(
-                            width: double.infinity,
-                            child: Text(
-                              'Select Month:',
-                              style: TextStyle(fontWeight: FontWeight.bold),
-                              textAlign: TextAlign.center,
-                            ),
-                          ),
-                        ),
-                        Center(
-                          child: DropdownButton<String>(
-                            value: _selectedMonth,
-                            items: [
-                              'January',
-                              'February',
-                              'March',
-                              'April',
-                              'May',
-                              'June',
-                              'July',
-                              'August',
-                              'September',
-                              'October',
-                              'November',
-                              'December'
-                            ].map<DropdownMenuItem<String>>((String value) {
-                              return DropdownMenuItem<String>(
-                                value: value,
-                                child: Text(value),
-                              );
-                            }).toList(),
-                            onChanged: (String? newValue) {
-                              setState(() {
-                                _selectedMonth = newValue;
-                              });
-                            },
-                            hint: Text(_selectedMonth ?? 'January'),
-                          ),
+                child: Center(
+                  child: Container(
+                    padding: EdgeInsets.symmetric(horizontal: 16.0),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(25.0),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.3),
+                          blurRadius: 4,
+                          offset: Offset(0, 2),
                         ),
                       ],
                     ),
-                  ],
+                    child: DropdownButton<String>(
+                      icon: Icon(Icons.arrow_drop_down),
+                      iconSize: 24,
+                      elevation: 16,
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 18.0,
+                      ),
+                      underline: SizedBox(),
+                      value: _selectedMonth,
+                      items: [
+                        'January',
+                        'February',
+                        'March',
+                        'April',
+                        'May',
+                        'June',
+                        'July',
+                        'August',
+                        'September',
+                        'October',
+                        'November',
+                        'December'
+                      ].map<DropdownMenuItem<String>>((String value) {
+                        return DropdownMenuItem<String>(
+                          value: value,
+                          child: Text(value),
+                        );
+                      }).toList(),
+                      onChanged: (String? newValue) {
+                        setState(() {
+                          _selectedMonth = newValue;
+                        });
+                      },
+                      hint: Text(_selectedMonth ?? 'January'),
+                    ),
+                  ),
                 ),
               ),
             ),
@@ -230,7 +227,8 @@ class _KPIState extends State<KPI> {
 
                                     ],
                                   ),
-                               /* Row(
+                                if(!isWideScreen)
+                                Row(
                                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                   children: [
                                     Expanded(
@@ -246,7 +244,7 @@ class _KPIState extends State<KPI> {
                                       ),
                                     ),
                                   ],
-                                ),*/
+                                ),
                               ]
 
                           );
