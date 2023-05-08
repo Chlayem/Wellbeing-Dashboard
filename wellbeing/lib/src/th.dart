@@ -63,9 +63,9 @@ final prod =emp.where((e) => e.department=="Production").toList();
 class Th extends StatelessWidget {
 
   final List<MenuuItem> items =[
-    MenuuItem(title: "Home", icon: Icons.home, screenIndex: 0),
+    MenuuItem(title: "Home", icon: Icons.home, screenIndex: 0,isSelected: true),
     MenuuItem(title: "Departments", icon: Icons.account_balance_rounded, screenIndex: -1,isExpansion: true,exItems: [
-      MenuuItem(title: "Production", screenIndex: 1),
+      MenuuItem(title: "Production", screenIndex: 1,),
       MenuuItem(title: "Finance",  screenIndex: 2),
       MenuuItem(title: "Marketing", screenIndex: 3)
     ]),
@@ -76,12 +76,12 @@ class Th extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(/*theme:ThemeData(
+    return MaterialApp(theme:ThemeData(
       textTheme: GoogleFonts.latoTextTheme(
         Theme.of(context).textTheme,
       ),
-      fontFamily:'SpaceGrotesk',
-    ),*/
+      fontFamily:'VarelaRound',
+    ),
         home: Builder(builder: (BuildContext context) {
       return MediaQuery.of(context).size.width > 900
           ? Scaffold(

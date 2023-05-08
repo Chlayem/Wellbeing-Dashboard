@@ -2,9 +2,14 @@ import 'package:flutter/material.dart';
 import '../blocs/provider.dart';
 import 'menu_item.dart';
 
-class Draweer extends StatelessWidget {
+class Draweer extends StatefulWidget {
   List<MenuuItem> items;
   Draweer({required this.items});
+  @override
+  State<Draweer> createState() => _DraweerState();
+}
+
+class _DraweerState extends State<Draweer> {
   Widget build(context) {
     //bool s=false;
     double screenWidth = MediaQuery.of(context).size.width;
@@ -32,17 +37,17 @@ class Draweer extends StatelessWidget {
           //SizedBox(height: 50.0,),
           ListView.builder(
             shrinkWrap: true,
-            itemCount: items.length,
+            itemCount: widget.items.length,
             itemBuilder: (context,i){
-              if(items[i].isExpansion){
-                List<MenuuItem>? l=items[i].exItems;
+              if(widget.items[i].isExpansion){
+                List<MenuuItem>? l=widget.items[i].exItems;
                 return Padding(
                   padding: const EdgeInsets.fromLTRB(5.0,5.0,5.0,5.0),
                   child: ExpansionTile(
                     iconColor: Colors.white,
                     collapsedIconColor: Colors.white,
-                    leading: Icon(items[i].icon,color: Colors.white,),
-                    title: Text(items[i].title,style:TextStyle(
+                    leading: Icon(widget.items[i].icon,color: Colors.white,),
+                    title: Text(widget.items[i].title,style:TextStyle(
                       color: Colors.white,
                       //letterSpacing: 3.0,
                     ) ,),
@@ -54,13 +59,26 @@ class Draweer extends StatelessWidget {
                           return Padding(
                             padding: EdgeInsets.only(left: 20.0),
                             child: ListTile(
+                                selected: l?[j].isSelected??false,
+                                selectedTileColor: Color.fromRGBO(102, 122, 138, 1.0),
                               hoverColor: Color.fromRGBO(102, 122, 138, 1.0),
                               leading:Icon(l![j].icon,color: Colors.white,size: 15.0,) ,
                               title: Text(l[j].title,style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 15.0,
                               ),),
-                              onTap: () {
+                              onTap: () {setState(() {
+                                for(MenuuItem item in widget.items){
+                                  if (item.isExpansion){
+                                    for(MenuuItem it in item.exItems!){
+                                      it.isSelected=false;
+                                    }}else{
+                                    item.isSelected=false;
+                                  }
+                                }
+                                l[j].isSelected=true;
+                              });
+
                                 if(screenWidth <= 1100){
                                   Navigator.of(context).pop();
                                 }
@@ -76,20 +94,31 @@ class Draweer extends StatelessWidget {
               } else{return Padding(
                 padding: EdgeInsets.fromLTRB(5.0,5.0,5.0,5.0),
                 child: ListTile(
-                  //selected: items[i].isSelected,
-                  //selectedColor: Colors.black,
+                  selected: widget.items[i].isSelected,
+                  selectedTileColor: Color.fromRGBO(102, 122, 138, 1.0),
                   hoverColor: Color.fromRGBO(102, 122, 138, 1.0),
-                  leading: Icon(items[i].icon,color: Colors.white,),
-                  title: Text(items[i].title,style: TextStyle(
+                  leading: Icon(widget.items[i].icon,color: Colors.white,),
+                  title: Text(widget.items[i].title,style: TextStyle(
                     color: Colors.white,
                     //letterSpacing: 3.0,
                   ),),
                   onTap: (){
-                    //items[i].isSelected=true;
+                    setState(() {
+                      for(MenuuItem item in widget.items){
+                        if (item.isExpansion){
+                          for(MenuuItem it in item.exItems!){
+                            it.isSelected=false;
+                          }}else{
+                          item.isSelected=false;
+                        }
+                      }
+                      widget.items[i].isSelected=true;
+                    });
+
                     if(screenWidth <= 1100){
                       Navigator.of(context).pop();
                     }
-                    Provider.of(context).navigateToScreen(items[i].screenIndex);
+                    Provider.of(context).navigateToScreen(widget.items[i].screenIndex);
 
                   },
                 ),

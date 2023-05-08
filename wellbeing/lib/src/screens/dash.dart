@@ -114,7 +114,7 @@ class Dash extends StatelessWidget {
                             title: Row(
                               children: [
                                 Expanded(flex:8,child: Text('${empFound[index].firstName!} ${empFound[index].lastName!}')),
-                                Expanded(flex:8,child: Text(cslDate!=null?DateFormat('yyyy-MM-dd').format(cslDate!):"       -",)),
+                                Expanded(flex:8,child: Text(cslDate!=null?DateFormat('yyyy-MM-dd').format(cslDate):"       -",)),
                                 Expanded(flex:2,child: setColor(empFound[index].stress.last.value)),
                                 Expanded(flex:2,child: setColor(empFound[index].anxiety.last.value)),
                                 Expanded(flex:2,child: setColor(empFound[index].fatigue.last.value)),

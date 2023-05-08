@@ -24,11 +24,11 @@ class _EmployeeFormState extends State<EmployeeForm> {
     birthDateController = TextEditingController(
         text: widget.employee.birthDate == null
             ? ""
-            : DateFormat('yyyy-mm-dd').format(widget.employee.birthDate!));
+            : DateFormat('yyyy-MM-dd').format(widget.employee.birthDate!));
     hiringDateController = TextEditingController(
         text: widget.employee.recDate == null
             ? ""
-            : DateFormat('yyyy-mm-dd').format(widget.employee.recDate!));
+            : DateFormat('yyyy-MM-dd').format(widget.employee.recDate!));
   }
   /*var birthDateController=TextEditingController(text:widget.employee.birthDate == null ?"":DateFormat('yyyy-mm-dd').format(widget.employee.birthDate!));//"${widget.employee.birthDate?.year}-${widget.employee.birthDate?.month}-${widget.employee.birthDate?.day}");
   var hiringDateController=TextEditingController(text:widget.employee.recDate == null ?"":DateFormat('yyyy-mm-dd').format(widget.employee.recDate!));
@@ -138,7 +138,7 @@ class _EmployeeFormState extends State<EmployeeForm> {
                                   lastDate: DateTime(2004),
                                   ).then((value) {
                                     if (value != null) {
-                                        birthDateController.text = "${value.year}-${value.month}-${value.day}";
+                                        birthDateController.text =DateFormat('yyyy-MM-dd').format(value);
                                         print(birthDateController.text);
                                     }
                                   });
@@ -239,7 +239,7 @@ class _EmployeeFormState extends State<EmployeeForm> {
                                     lastDate: DateTime(2023),
                                   ).then((value) {
                                     if (value != null) {
-                                      hiringDateController.text= "${value.year}-${value.month}-${value.day}";
+                                      hiringDateController.text= DateFormat('yyyy-MM-dd').format(value);
                                     }
                                   });
                                 });
@@ -287,6 +287,7 @@ class _EmployeeFormState extends State<EmployeeForm> {
                               if(widget.formType=='edit') Provider.of(context).popEmployee(widget.employee);
                               Provider.of(context).pushEmployee(widget.employee);
                               print('Employee: ${widget.employee.toString()}');
+                              Navigator.of(context).pop();
                             }
                           },
                           child: Text(widget.formType=='add'?'Ajouter employé':'Modifier'),

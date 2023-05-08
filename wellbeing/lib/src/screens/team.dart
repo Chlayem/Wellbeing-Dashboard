@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:wellbeing/src/blocs/provider.dart';
 import 'package:wellbeing/src/elements/emlpoyee_form.dart';
 
 import '../elements/employee.dart';
 
 class Crud extends StatelessWidget {
-  final List<Employee> emp;
+  List<Employee> emp;
   Crud({required this.emp});
 
   List<Employee> empFound =[];
@@ -119,7 +120,6 @@ class Crud extends StatelessWidget {
                           hoverColor: Colors.grey,
 
                           child: Card(
-
                             //color: Colors.transparent,
                             elevation: 10,
                             child: Container(
@@ -164,11 +164,10 @@ class Crud extends StatelessWidget {
                                         ).then((value) {
                                           if (value == true) {
                                             Provider.of(context).popEmployee(empFound[index]);
-                                            // perform the delete operation here
                                           }
                                         });
                                         },
-                                        icon: Icon(Icons.delete_outline_outlined,size: 20.0,),
+                                        icon: const Icon(Icons.delete_outline_outlined,size: 20.0,),
                                       ),
                                     ],
                                   ),
@@ -180,10 +179,10 @@ class Crud extends StatelessWidget {
                                       Provider.of(context).navigateToScreen(4);
                                     },
                                     contentPadding:EdgeInsets.fromLTRB(2.0,10.0,2.0,50.0),
-                                    subtitle:Text(empFound[index].job!,) ,
+                                    subtitle:Text(empFound[index].job!,style:GoogleFonts.mulish()) ,
                                     title: Row(
                                       children: [
-                                        Expanded(child: Text("${empFound[index].firstName} ${empFound[index].lastName}",style: TextStyle(fontWeight: FontWeight.bold),)),
+                                        Expanded(child: Text("${empFound[index].firstName} ${empFound[index].lastName}",style: TextStyle(fontFamily:'VarelaRound',fontWeight: FontWeight.bold),)),
                                         /*Expanded(
                                             child: Row(
                                               children: [
@@ -219,9 +218,9 @@ class Crud extends StatelessWidget {
                                                 child: Column(
                                                   crossAxisAlignment: CrossAxisAlignment.start,
                                                   children: [
-                                                    Text("Department :",style: TextStyle(letterSpacing:2,color: Colors.blue[800],fontWeight:FontWeight.bold,fontSize: 10),),
+                                                    Text("Department :",style: GoogleFonts.mulish(color: Colors.blue[800],fontWeight:FontWeight.bold,fontSize: 12),),
                                                     SizedBox(height: 5),
-                                                    Text(empFound[index].department!,style: TextStyle(letterSpacing:1,fontSize: 16),)
+                                                    Text(empFound[index].department!,style: GoogleFonts.mulish(letterSpacing:1,fontSize: 16),)
                                                   ],
                                                 ),
                                               ),
@@ -229,10 +228,10 @@ class Crud extends StatelessWidget {
                                                 child: Column(
                                                   crossAxisAlignment: CrossAxisAlignment.start,
                                                   children: [
-                                                    Text("Date hired :",style: TextStyle(letterSpacing:2,color: Colors.blue[800],fontWeight:FontWeight.bold,fontSize: 10)),
+                                                    Text("Date hired :",style: GoogleFonts.mulish(color: Colors.blue[800],fontWeight:FontWeight.bold,fontSize: 12)),
                                                     SizedBox(height: 5),
                                                     Text("${empFound[index].recDate?.day}-${empFound[index].recDate?.month}-${empFound[index].recDate?.year}",
-                                                    style: TextStyle(fontSize: 16),)
+                                                    style: GoogleFonts.mulish(fontSize: 16),)
                                                   ],
                                                 ),
                                               )
@@ -242,14 +241,14 @@ class Crud extends StatelessWidget {
                                           Row(
                                             children: [
                                               Expanded(child: Icon(Icons.mail_outline,size: 15,)),
-                                              Expanded(flex:6,child: Text(empFound[index].email ?? "-",maxLines: 2,style: TextStyle(fontSize: 12) ,)),
+                                              Expanded(flex:6,child: Text(empFound[index].email ?? "-",maxLines: 2,style: GoogleFonts.mulish(fontSize: 12) ,)),
                                             ],
                                           ),
                                           SizedBox(height: 10,),
                                           Row(
                                             children: [
                                               Expanded(child: Icon(Icons.phone_outlined,size: 15,)),
-                                              Expanded(flex:6,child: Text("+216 ${empFound[index].num}" ,style: TextStyle(fontSize: 12)))
+                                              Expanded(flex:6,child: Text("+216 ${empFound[index].num}" ,style: GoogleFonts.mulish(fontSize: 12)))
                                             ],
                                           )
 

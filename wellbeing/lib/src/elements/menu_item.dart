@@ -6,9 +6,9 @@ class MenuuItem {
   int screenIndex;
   bool isExpansion ;
   List<MenuuItem>? exItems;
-  bool isSelected=false;
+  bool isSelected;
 
 
 
-  MenuuItem({required this.title, this.icon,required this.screenIndex,this.isExpansion=false,this.exItems});
+  MenuuItem({this.isSelected=false,required this.title, this.icon,required this.screenIndex,this.isExpansion=false,this.exItems});
 }

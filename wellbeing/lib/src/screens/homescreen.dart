@@ -10,6 +10,27 @@ import '../elements/incident.dart';
 
 class Home extends StatelessWidget {
   Home({Key? key}) : super(key: key);
+  String _selectedMonth="";
+  final List<String> _months = [
+    'Janvier',
+    'Février',
+    'Mars',
+    'Avril',
+    'Mai',
+    'Juin',
+    'Juillet',
+    'Août',
+    'Septembre',
+    'Octobre',
+    'Novembre',
+    'Décembre',
+  ];
+  final List<String> _years = [
+    '2020',
+    '2021',
+    '2022',
+    '2023'
+  ];
 
 
   /*final dataMap = <String, double>{
@@ -19,6 +40,16 @@ class Home extends StatelessWidget {
   final colorList = <Color>[
     Color(0xffFFB4B4),
   ];
+
+  Color setColor(double val){
+    if(val <10){
+      return Color(0xffFFB4B4);
+    }else if (val <20){
+      return Color(0xfff95555);
+    }else {
+      return Color(0xffff0000);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +73,74 @@ class Home extends StatelessWidget {
                     child: Column(children: [
                       Row(
                         children: [
-                          ElevatedButton(
+                          Container(
+                            padding: EdgeInsets.symmetric(horizontal: 16.0),
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(25.0),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.grey.withOpacity(0.3),
+                                  blurRadius: 4,
+                                  offset: Offset(0, 2),
+                                ),
+                              ],
+                            ),
+                            child: DropdownButton(
+                              icon: Icon(Icons.arrow_drop_down),
+                              iconSize: 24,
+                              elevation: 16,
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 18.0,
+                              ),
+                              underline: SizedBox(),
+                              value:Provider.of(context).currentPeriod.month ,
+                                items: _months
+                                    .map((month) => DropdownMenuItem<String>(
+                                  value: month,
+                                  child: Text(month),
+                                ))
+                                    .toList(),
+                                onChanged: (value){
+                                  Provider.of(context).pushPeriod(value??'Mars');
+                                },
+                            ),
+                          ),
+                          SizedBox(width: 20.0,),
+                          Container(
+                            padding: EdgeInsets.symmetric(horizontal: 16.0),
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(25.0),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.grey.withOpacity(0.3),
+                                  blurRadius: 4,
+                                  offset: Offset(0, 2),
+                                ),
+                              ],
+                            ),
+                            child: DropdownButton(
+                              icon: Icon(Icons.arrow_drop_down),
+                              iconSize: 24,
+                              elevation: 16,
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 18.0,
+                              ),
+                              underline: SizedBox(),
+                              value:'2023' ,
+                              items: _years
+                                  .map((year) => DropdownMenuItem<String>(
+                                value: year,
+                                child: Text(year),
+                              ))
+                                  .toList(),
+                              onChanged: (value){},
+                            ),
+                          ),
+                          /*ElevatedButton(
                               onPressed: () {
                                 Period per = Period(departments: [
                                   Department(
@@ -105,10 +203,11 @@ class Home extends StatelessWidget {
                                 Provider.of(context).pushPeriod(per);
                               },
                               child: Text("Month")
-                          ),
+                          ),*/
 
                         ],
                       ),
+                      SizedBox(height: 30.0,),
                       GridView.builder(
                           gridDelegate:  SliverGridDelegateWithFixedCrossAxisCount(
                             crossAxisCount: pieChartCount,
@@ -120,9 +219,10 @@ class Home extends StatelessWidget {
                         itemCount: p.departments.length,
                           itemBuilder: (context,i){
                             return Container(
-                                padding: EdgeInsets.only(
+                              padding: EdgeInsets.symmetric(vertical: 5,horizontal: 10),
+                                /*padding: EdgeInsets.only(
                                   left: width * .006,
-                                  right: width * 0.006),
+                                  right: width * 0.006),*/
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(25),
                                   color: Color(0xffD6E4E5),
@@ -148,7 +248,7 @@ class Home extends StatelessWidget {
                                           dataMap: p.departments[i].stress,
                                           chartType: ChartType.ring,
                                           baseChartColor: Color(0xffFFF9CA),
-                                          colorList: colorList,
+                                          colorList: [setColor(p.departments[i].stress.values.toList().first)],
                                           chartValuesOptions:
                                           ChartValuesOptions(
                                             showChartValues: false,
@@ -170,7 +270,7 @@ class Home extends StatelessWidget {
                                           chartType: ChartType.ring,
                                           baseChartColor: Color(
                                               0xffFFF9CA),
-                                          colorList: colorList,
+                                          colorList: [setColor(p.departments[i].anxiety.values.toList().first)],
                                           chartValuesOptions:
                                           ChartValuesOptions(
                                             showChartValues: false,
@@ -191,7 +291,7 @@ class Home extends StatelessWidget {
                                           dataMap: p.departments[i].fatigue,
                                           chartType: ChartType.ring,
                                           baseChartColor: Color(0xffFFF9CA),
-                                          colorList: colorList,
+                                          colorList: [setColor(p.departments[i].fatigue.values.toList().first)],
                                           chartValuesOptions:
                                           ChartValuesOptions(
                                             showChartValueBackground: false,
@@ -209,30 +309,32 @@ class Home extends StatelessWidget {
                                   ])),
                               Expanded(
                                   flex: 3,
-                                  child: Padding(
-                                      padding: EdgeInsets.only(
-                                          bottom: height * .015,
-                                          left: width * 0.015),
-                                      child: Row(children: [
-                                        Expanded(
-                                            child: Text('Stress',
-                                                style: TextStyle(
-                                                    color: Colors
-                                                        .white,
-                                                    fontSize: 20))),
-                                        Expanded(
-                                            child: Text('Anxiety',
-                                                style: TextStyle(
-                                                    color: Colors
-                                                        .white,
-                                                    fontSize: 20.0))),
-                                        Expanded(
-                                            child: Text('Fatigue',
-                                                style: TextStyle(
-                                                    color: Colors
-                                                        .white,
-                                                    fontSize: 20.0))),
-                                      ])))
+                                  child: Row(children: [
+                                    Expanded(
+                                        child: Center(
+                                          child: Text('Stress',
+                                              style: TextStyle(
+                                                  color: Colors
+                                                      .white,
+                                                  fontSize: 18)),
+                                        )),
+                                    Expanded(
+                                        child: Center(
+                                          child: Text('Anxiety',
+                                              style: TextStyle(
+                                                  color: Colors
+                                                      .white,
+                                                  fontSize: 18.0)),
+                                        )),
+                                    Expanded(
+                                        child: Center(
+                                          child: Text('Fatigue',
+                                              style: TextStyle(
+                                                  color: Colors
+                                                      .white,
+                                                  fontSize: 18.0)),
+                                        )),
+                                  ]))
                             ]) ,
                             );
                           },
@@ -279,9 +381,9 @@ class Home extends StatelessWidget {
                       ]),
                       GridView.count(
                         childAspectRatio: 1.2,
-                        crossAxisSpacing: 150,
+                        crossAxisSpacing: 30,
                         shrinkWrap: true,
-                        crossAxisCount: width>700?2:1,
+                        crossAxisCount: width>500?2:1,
                           children: [
                             Container(
                               padding: EdgeInsets.only(
