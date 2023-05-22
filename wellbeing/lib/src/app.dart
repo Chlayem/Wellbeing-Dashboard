@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wellbeing/src/screens/teamdet.dart';
 import 'elements/chart_data.dart';
 import 'elements/employee.dart';
 import 'elements/menu_item.dart';
@@ -108,6 +109,8 @@ class App extends StatelessWidget {
                               return YTD();
                             case 6:
                               return Parameters();
+                            case 7:
+                              return Detail();
                             default:
                               return Home(); // Default screen to show if the latest value in the stream doesn't match any of the cases
                           }
@@ -141,6 +144,8 @@ class App extends StatelessWidget {
                             return YTD();
                           case 6:
                             return Parameters();
+                          case 7:
+                            return Detail();
                           default:
                             return Home(); // Default screen to show if the latest value in the stream doesn't match any of the cases
                         }

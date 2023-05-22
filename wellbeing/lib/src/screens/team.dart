@@ -176,7 +176,7 @@ class Crud extends StatelessWidget {
                                       Employee e =empFound[index];
                                       Provider.of(context).selectEmployee(e);
                                       Provider.of(context).pushCsl(e.csl??[]);
-                                      Provider.of(context).navigateToScreen(4);
+                                      Provider.of(context).navigateToScreen(7);
                                     },
                                     contentPadding:EdgeInsets.fromLTRB(2.0,10.0,2.0,50.0),
                                     subtitle:Text(empFound[index].job!,style:GoogleFonts.mulish()) ,
