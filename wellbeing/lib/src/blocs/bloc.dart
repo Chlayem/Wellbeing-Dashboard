@@ -10,7 +10,7 @@ import '../elements/period.dart';
 
 class Bloc extends Object {
   List<Period> pers = [
-    Period(month: 'Janvier', departments: [
+    Period(month: 'January', departments: [
       Department(
           stress: {"Flutter": 12},
           anxiety: {"anxiety": 25},
@@ -36,7 +36,7 @@ class Bloc extends Object {
       Incident("Emotionelle", 2),
       Incident("Incidents", 12)
     ]),
-    Period(month: 'Février', departments: [
+    Period(month: 'February', departments: [
       Department(
           stress: {"Flutter": 11},
           anxiety: {"anxiety": 28},
@@ -227,6 +227,7 @@ class Bloc extends Object {
   void pushEmployee(Employee e){
     currentList.add(e);
     _listController.sink.add(currentList);
+
   }
   void popEmployee(Employee e){
     currentList.remove(e);

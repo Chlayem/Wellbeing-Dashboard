@@ -31,6 +31,7 @@ Widget construireGraphiqueBarres(String titre, List<BarChartData> donneesGraphiq
             height: 200,
             child: SfCartesianChart(
               primaryXAxis: CategoryAxis(
+
                 labelStyle: TextStyle(fontSize: isMobile ? 10 : 12), // Modifiez la taille de la police
                 labelRotation: isMobile ? -45 : 0, // Inclinez les étiquettes
               ),
@@ -42,6 +43,7 @@ Widget construireGraphiqueBarres(String titre, List<BarChartData> donneesGraphiq
               ),
               series: <ColumnSeries<BarChartData, String>>[
                 ColumnSeries<BarChartData, String>(
+                  borderRadius: BorderRadius.circular(8),
                   dataSource: donneesGraphiqueBarres,
                   xValueMapper: (BarChartData data, _) => data.text,
                   yValueMapper: (BarChartData data, _) => data.y,

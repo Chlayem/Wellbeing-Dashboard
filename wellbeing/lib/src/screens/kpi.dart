@@ -172,10 +172,10 @@ class _KPIState extends State<KPI> {
                                       child: Padding(
                                         padding: const EdgeInsets.fromLTRB(8.0, 25, 8.0, 0),
                                         child: construireGraphiqueBarres('Severity', [
-                                          BarChartData('Low', 1, 4, Colors.teal),
-                                          BarChartData('Medium', 2, 3, Colors.orange),
-                                          BarChartData('High', 3, 2, Colors.brown),
-                                          BarChartData('Critical', 4, 5, Colors.deepOrange)
+                                          BarChartData('Low', 1, 4, Colors.greenAccent[400]!),
+                                          BarChartData('Medium', 2, 3, Colors.yellowAccent[400]!),
+                                          BarChartData('High', 3, 2, Colors.lightBlue),
+                                          BarChartData('Critical', 4, 5, Colors.pink)
                                         ]),
                                       ),
                                     ),
@@ -184,10 +184,10 @@ class _KPIState extends State<KPI> {
                                         child: Padding(
                                           padding: const EdgeInsets.fromLTRB(8.0, 25, 8.0, 0),
                                           child: construireGraphiqueBarres('Type Of Incident', [
-                                            BarChartData('Injury', 1, 4, Colors.teal),
-                                            BarChartData('Illness', 2, 3, Colors.orange),
-                                            BarChartData('Psychological', 3, 2, Colors.brown),
-                                            BarChartData('Harrasment', 4, 5, Colors.deepOrange),
+                                            BarChartData('Injury', 1, 4, Colors.greenAccent[400]!),
+                                            BarChartData('Illness', 2, 3, Colors.yellowAccent[400]!),
+                                            BarChartData('Psychological', 3, 2, Colors.lightBlue),
+                                            BarChartData('Harrasment', 4, 5, Colors.pink),
                                             BarChartData('Other', 4, 7, Colors.deepPurple)
                                           ]),
                                         ),
@@ -197,10 +197,10 @@ class _KPIState extends State<KPI> {
                                         child: Padding(
                                           padding: const EdgeInsets.fromLTRB(8.0, 25, 8.0, 0),
                                           child: construireGraphiqueBarres('Injury Consequence', [
-                                            BarChartData('Lost Time', 1, 1, Colors.teal),
-                                            BarChartData('Medical Case', 2, 3, Colors.orange),
-                                            BarChartData('First Aid', 3, 2, Colors.brown),
-                                            BarChartData('No Treatment', 4, 5, Colors.deepOrange),
+                                            BarChartData('Lost Time', 1, 1, Colors.greenAccent[400]!),
+                                            BarChartData('Medical Case', 2, 3, Colors.yellowAccent[400]!),
+                                            BarChartData('First Aid', 3, 2, Colors.lightBlue),
+                                            BarChartData('No Treatment', 4, 5, Colors.pink),
                                             BarChartData('Lost Days', 4, 7, Colors.deepPurple)
                                           ]),
                                         ),
@@ -215,10 +215,10 @@ class _KPIState extends State<KPI> {
                                         child: Padding(
                                           padding: const EdgeInsets.fromLTRB(8.0, 25, 8.0, 0),
                                           child: construireGraphiqueBarres('Type Of Incident', [
-                                            BarChartData('Injury', 1, 4, Colors.teal),
-                                            BarChartData('Illness', 2, 3, Colors.orange),
-                                            BarChartData('Psychological', 3, 2, Colors.brown),
-                                            BarChartData('Harrasment', 4, 5, Colors.deepOrange),
+                                            BarChartData('Injury', 1, 4, Colors.greenAccent[400]!),
+                                            BarChartData('Illness', 2, 3, Colors.yellowAccent[400]!),
+                                            BarChartData('Psychological', 3, 2, Colors.lightBlue),
+                                            BarChartData('Harrasment', 4, 5, Colors.pink),
                                             BarChartData('Other', 4, 7, Colors.deepPurple),
                                           ]),
                                         ),
@@ -235,10 +235,10 @@ class _KPIState extends State<KPI> {
                                       child: Padding(
                                         padding: const EdgeInsets.fromLTRB(8.0, 25, 8.0, 0),
                                         child: construireGraphiqueBarres('Injury Consequence', [
-                                          BarChartData('Lost Time', 1, 1, Colors.teal),
-                                          BarChartData('Medical Case', 2, 3, Colors.orange),
-                                          BarChartData('First Aid', 3, 2, Colors.brown),
-                                          BarChartData('No Treatment', 4, 5, Colors.deepOrange),
+                                          BarChartData('Lost Time', 1, 1, Colors.greenAccent[400]!),
+                                          BarChartData('Medical Case', 2, 3, Colors.yellowAccent[400]!),
+                                          BarChartData('First Aid', 3, 2, Colors.lightBlue),
+                                          BarChartData('No Treatment', 4, 5, Colors.pink),
                                           BarChartData('Lost Days', 4, 7, Colors.deepPurple)
                                         ]),
                                       ),

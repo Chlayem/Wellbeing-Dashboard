@@ -74,7 +74,8 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Provider(
-      child: MaterialApp(home: Builder(builder: (BuildContext context) {
+      child: MaterialApp(debugShowCheckedModeBanner:false,home: Builder(builder: (BuildContext context) {
+
         return MediaQuery.of(context).size.width > 1100
             ? Scaffold(
                 body: Row(
