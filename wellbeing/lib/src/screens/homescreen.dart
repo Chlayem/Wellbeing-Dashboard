@@ -536,10 +536,10 @@ class Home extends StatelessWidget {
                                     horizontal: chartPaddingHorizantal,
                                     vertical: chartPaddingVertical),
                                 child: construireGraphiqueBarres('Severity', [
-                                  BarChartData('Low', 1, 4, Colors.greenAccent[400]!),
-                                  BarChartData('Medium', 2, 3, Colors.yellowAccent[400]!),
-                                  BarChartData('High', 3, 2, Colors.lightBlue),
-                                  BarChartData('Critical', 4, 5, Colors.pink)
+                                  BarChartData('Low', 1, p.incidents[0].number as double, Colors.greenAccent[400]!),
+                                  BarChartData('Medium', 2, p.incidents[1].number as double, Colors.yellowAccent[400]!),
+                                  BarChartData('High', 3, p.incidents[2].number as double, Colors.lightBlue),
+                                  BarChartData('Critical', 4, p.incidents[3].number as double, Colors.pink)
                                 ]),
                               ),
                               Container(
@@ -548,11 +548,11 @@ class Home extends StatelessWidget {
                                     vertical: chartPaddingVertical),
                                 child: construireGraphiqueBarres(
                                     'Type Of Incident', [
-                                  BarChartData('Injury', 1, 4, Colors.greenAccent[400]!),
-                                  BarChartData('Illness', 2, 3, Colors.yellowAccent[400]!),
-                                  BarChartData('Psychological', 3, 2, Colors.lightBlue),
-                                  BarChartData('Harrasment', 4, 5, Colors.pink),
-                                  BarChartData('Other', 4, 7, Colors.deepPurple)
+                                  BarChartData('Injury', 1, p.daysOff[0].number as double, Colors.greenAccent[400]!),
+                                  BarChartData('Illness', 2, p.daysOff[1].number as double, Colors.yellowAccent[400]!),
+                                  BarChartData('Psychological', 3, p.daysOff[2].number as double, Colors.lightBlue),
+                                  BarChartData('Harrasment', 4, p.daysOff[3].number as double, Colors.pink),
+                                  BarChartData('Other', 4, p.daysOff[4].number as double, Colors.deepPurple)
                                 ]),
                               )
                             ])

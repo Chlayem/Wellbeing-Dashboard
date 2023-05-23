@@ -24,10 +24,22 @@ class Employee {
 
 
 
-  Map<String,dynamic> toMap(){
-    return{
-      'firstName':firstName,
-      'lastName':lastName,
+  Map<String, dynamic> toMap() {
+    return {
+      'firstName': firstName,
+      'lastName': lastName,
+      'cin': cin,
+      'email': email,
+      'job': job,
+      'workHours': workHours,
+      'birthDate': birthDate,
+      'recDate': recDate,
+      'num': num,
+      'department': department,
+      'stress': stress.map((chartData) => chartData.toMap()).toList(),
+      'anxiety': anxiety.map((chartData) => chartData.toMap()).toList(),
+      'fatigue': fatigue.map((chartData) => chartData.toMap()).toList(),
+      'csl': csl?.map((consultation) => consultation.toMap()).toList(),
     };
   }
 
@@ -36,7 +48,44 @@ class Employee {
     return Employee(
       firstName: data?['firstName'] ?? '',
       lastName: data?['lastName'] ?? '',
+      cin: data?['cin'] ?? 0,
+      email: data?['email'] ?? '',
+      job: data?['job'] ?? '',
+      workHours: data?['workHours'] ?? 0,
+      birthDate: data?['birthDate']?.toDate() ?? null,
+      recDate: data?['recDate']?.toDate() ?? null,
+      num: data?['num'] ?? 0,
+      department: data?['department'] ?? '',
+      stress: parseChartDataList(data?['stress']),
+      anxiety: parseChartDataList(data?['anxiety']),
+      fatigue: parseChartDataList(data?['fatigue']),
+      csl: parseConsultationList(data?['csl']),
     );
   }
+
+  static List<ChartData> parseChartDataList(List<dynamic>? chartDataList) {
+    if (chartDataList == null) {
+      return [];
+    }
+    return chartDataList.map((chartData) => ChartData(
+      month: chartData['month'],
+      value: chartData['value'] ?? -1,
+    )).toList();
+  }
+
+  static List<Consultation> parseConsultationList(List<dynamic>? consultationList) {
+    if (consultationList == null) {
+      return [];
+    }
+    return consultationList.map((consultation) => Consultation(
+      date: consultation['date'].toDate(),
+      bilan: consultation['bilan'] ?? '',
+      diag: consultation['diag'] ?? '',
+      pro: consultation['pro'] ?? '',
+      res: consultation['res'] ?? '',
+      isExpanded: consultation['isExpanded'] ?? false,
+    )).toList();
+  }
+
 }
 

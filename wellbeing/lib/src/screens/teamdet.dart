@@ -62,7 +62,7 @@ class Detail extends StatelessWidget {
                                   width: 40,
                                   child: Expanded(
                                     child: CircleAvatar(
-                                      backgroundImage: AssetImage("assets/Emna.jpg"),
+                                      backgroundImage: AssetImage("assets/${employee.firstName}.jpg"),
                                     ),
                                   ),
                                 ),

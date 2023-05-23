@@ -7,8 +7,8 @@ import 'employee.dart';
 
 class EmployeeForm extends StatefulWidget {
   //final FirebaseFirestore _firestore=FirebaseFirestore.instance;
-  final CollectionReference employees =
-  FirebaseFirestore.instance.collection('employees');
+  //final CollectionReference employees =
+  //FirebaseFirestore.instance.collection('employees');
 
   final Employee employee;
   String formType ;
@@ -23,11 +23,11 @@ class _EmployeeFormState extends State<EmployeeForm> {
   late String _selectedDepartment;
   late TextEditingController birthDateController;
   late TextEditingController hiringDateController;
-  late TextEditingController firstNameController ;
+  //late TextEditingController firstNameController ;
   @override
   void initState() {
     super.initState();
-    firstNameController = TextEditingController();
+    //firstNameController = TextEditingController();
     birthDateController = TextEditingController(
         text: widget.employee.birthDate == null
             ? ""
@@ -66,7 +66,7 @@ class _EmployeeFormState extends State<EmployeeForm> {
                             Expanded(
                               child: TextFormField(
                                 initialValue: widget.employee.firstName ,
-                                controller: firstNameController,
+                                //controller: firstNameController,
                                 decoration: InputDecoration(labelText: 'First Name'),
                                 validator: (value) {
                                   if (value!.isEmpty) {
@@ -292,9 +292,11 @@ class _EmployeeFormState extends State<EmployeeForm> {
                             if (_formKey.currentState!.validate()) {
                               widget.employee.department=_selectedDepartment;
                               _formKey.currentState!.save();
-                              if(widget.formType=='edit') Provider.of(context).popEmployee(widget.employee);
+                              if(widget.formType=='edit') {
+                                Provider.of(context).popEmployee(widget.employee);
+                              }
                               Provider.of(context).pushEmployee(widget.employee);
-                              widget.employees.add(widget.employee.toMap());
+                              //widget.employees.add(widget.employee.toMap());
                               print('Employee: ${widget.employee.toString()}');
                               Navigator.of(context).pop();
                             }

@@ -21,7 +21,7 @@ class Crud extends StatelessWidget {
       }else{
         result=emp.where((e) => e.firstName!.toLowerCase().contains(entredKeyword.toLowerCase())).toList();
       }
-      Provider.of(context).pushList(result);
+      Provider.of(context).pushListFound(result);
     }
     double searchWidth ;
     double screenWidth = MediaQuery.of(context).size.width;
@@ -100,7 +100,7 @@ class Crud extends StatelessWidget {
             ),
             SizedBox(height: 20,),
             StreamBuilder<List<Employee>>(
-                stream:Provider.of(context).lists,
+                stream:Provider.of(context).foundedLists,
                 builder:(BuildContext context, AsyncSnapshot<List<Employee>> snapshot){
                   if (snapshot.hasData && snapshot.data != null){
                     empFound= snapshot.data!;
@@ -179,7 +179,7 @@ class Crud extends StatelessWidget {
                                       Provider.of(context).navigateToScreen(7);
                                     },
                                     contentPadding:EdgeInsets.fromLTRB(2.0,10.0,2.0,50.0),
-                                    subtitle:Text(empFound[index].job!,style:GoogleFonts.mulish()) ,
+                                    subtitle:Text(empFound[index].job??"",style:GoogleFonts.mulish()) ,
                                     title: Row(
                                       children: [
                                         Expanded(child: Text("${empFound[index].firstName} ${empFound[index].lastName}",style: TextStyle(fontFamily:'VarelaRound',fontWeight: FontWeight.bold),)),
@@ -220,7 +220,7 @@ class Crud extends StatelessWidget {
                                                   children: [
                                                     Text("Department :",style: GoogleFonts.mulish(color: Colors.blue[800],fontWeight:FontWeight.bold,fontSize: 12),),
                                                     SizedBox(height: 5),
-                                                    Text(empFound[index].department!,style: GoogleFonts.mulish(letterSpacing:1,fontSize: 16),)
+                                                    Text(empFound[index].department??'',style: GoogleFonts.mulish(letterSpacing:1,fontSize: 16),)
                                                   ],
                                                 ),
                                               ),

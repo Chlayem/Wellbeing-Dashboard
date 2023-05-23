@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
-import '../elements/bar_chart(ytd).dart';
+import '../elements/bar_chart(kpi).dart';
 import '../elements/chart_data.dart';
 import '../elements/kpi_chart.dart';
 
@@ -167,10 +167,10 @@ class _YTDState extends State<YTD> {
                                       child: Padding(
                                         padding: const EdgeInsets.fromLTRB(8.0, 25, 8.0, 0),
                                         child: construireGraphiqueBarres('Severity', [
-                                          BarChartData('Low', 1, 40, Colors.teal),
-                                          BarChartData('Medium', 2, 30, Colors.orange),
-                                          BarChartData('High', 3, 70, Colors.brown),
-                                          BarChartData('Critical', 4, 80, Colors.deepOrange)
+                                          BarChartData('Low', 1, 40, Colors.greenAccent[400]!),
+                                          BarChartData('Medium', 2, 30, Colors.yellowAccent[400]!),
+                                          BarChartData('High', 3, 70, Colors.pink),
+                                          BarChartData('Critical', 4, 80, Colors.deepPurple)
                                         ]),
                                       ),
                                     ),
@@ -180,12 +180,12 @@ class _YTDState extends State<YTD> {
                                           padding: const EdgeInsets.fromLTRB(8.0, 25, 8.0, 0),
                                           child: construireGraphiqueBarres(
                                               'Type Of Incident', [
-                                            BarChartData('Injury', 1, 40, Colors.teal),
-                                            BarChartData('Illness', 2, 60, Colors.orange),
+                                            BarChartData('Injury', 1, 40, Colors.greenAccent[400]!),
+                                            BarChartData('Illness', 2, 60, Colors.yellowAccent[400]!),
                                             BarChartData(
-                                                'Psychological', 3, 20, Colors.brown),
+                                                'Psychological', 3, 20, Colors.lightBlue),
                                             BarChartData(
-                                                'Harrasment', 4, 50, Colors.deepOrange),
+                                                'Harrasment', 4, 50, Colors.pink),
                                             BarChartData(
                                                 'Other', 4, 70, Colors.deepPurple)
                                           ]),
@@ -197,13 +197,13 @@ class _YTDState extends State<YTD> {
                                           padding: const EdgeInsets.fromLTRB(8.0, 25, 8.0, 0),
                                           child: construireGraphiqueBarres(
                                               'Injury Consequence', [
-                                            BarChartData('Lost Time', 1, 20, Colors.teal),
+                                            BarChartData('Lost Time', 1, 20, Colors.greenAccent[400]!),
                                             BarChartData(
-                                                'Medical Case', 2, 50, Colors.orange),
+                                                'Medical Case', 2, 50, Colors.yellowAccent[400]!),
                                             BarChartData(
-                                                'First Aid', 3, 20, Colors.brown),
+                                                'First Aid', 3, 20, Colors.lightBlue),
                                             BarChartData(
-                                                'No Treatment', 4, 70, Colors.deepOrange),
+                                                'No Treatment', 4, 70, Colors.pink),
                                             BarChartData(
                                                 'Lost Days', 4, 90, Colors.deepPurple)
                                           ]),

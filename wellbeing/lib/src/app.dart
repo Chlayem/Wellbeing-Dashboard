@@ -70,10 +70,12 @@ class App extends StatelessWidget {
       MenuuItem(title: "Monthly Dashboard",icon:Icons.area_chart,screenIndex: 4),
       MenuuItem(title: "YTD Dashboard", icon:Icons.area_chart,screenIndex: 5)
     ]),
-    MenuuItem(title: "Log out", icon:Icons.logout_outlined,screenIndex: 6)
+    MenuuItem(title: "Log out", icon:Icons.logout_rounded,screenIndex: 6)
   ];
+
   @override
   Widget build(BuildContext context) {
+
     return Provider(
       child: MaterialApp(debugShowCheckedModeBanner:false,home: Builder(builder: (BuildContext context) {
 
@@ -100,9 +102,41 @@ class App extends StatelessWidget {
                             case 1:
                               return Crud(emp: Provider.of(context).currentList);
                             case 2:
-                              return Indicators();
+                              return StreamBuilder<String>(
+                                stream: Provider.of(context).selectedMonth,
+                                builder: (context, monthSnapshot) {
+                                  return StreamBuilder<String>(
+                                    stream: Provider.of(context).selectedYear,
+                                    builder: (context, yearSnapshot) {
+                                      if (!monthSnapshot.hasData || !yearSnapshot.hasData) {
+                                        return CircularProgressIndicator(); // Show a loading indicator if there's no data yet
+                                      }
+                                      return Indicators(
+                                        selectedMonth: monthSnapshot.data ?? '',
+                                        selectedYear: yearSnapshot.data ?? '',
+                                      );
+                                    },
+                                  );
+                                },
+                              );
                             case 3:
-                              return Data();
+                              return StreamBuilder<String>(
+                                stream: Provider.of(context).selectedMonth,
+                                builder: (context, monthSnapshot) {
+                                  return StreamBuilder<String>(
+                                    stream: Provider.of(context).selectedYear,
+                                    builder: (context, yearSnapshot) {
+                                      if (!monthSnapshot.hasData || !yearSnapshot.hasData) {
+                                        return CircularProgressIndicator(); // Show a loading indicator if there's no data yet
+                                      }
+                                      return Data(
+                                        selectedMonth: monthSnapshot.data?? '',
+                                        selectedYear: yearSnapshot.data?? '',
+                                      );
+                                    },
+                                  );
+                                },
+                              );
                             case 4:
                               return KPI();
                             case 5:
@@ -135,9 +169,40 @@ class App extends StatelessWidget {
                           case 1:
                             return Crud(emp: Provider.of(context).currentList);
                           case 2:
-                            return Indicators();
-                          case 3:
-                            return Data();
+                            return StreamBuilder<String>(
+                              stream: Provider.of(context).selectedMonth,
+                              builder: (context, monthSnapshot) {
+                                return StreamBuilder<String>(
+                                  stream: Provider.of(context).selectedYear,
+                                  builder: (context, yearSnapshot) {
+                                    if (!monthSnapshot.hasData || !yearSnapshot.hasData) {
+                                      return CircularProgressIndicator(); // Show a loading indicator if there's no data yet
+                                    }
+                                    return Indicators(
+                                      selectedMonth: monthSnapshot.data ?? '',
+                                      selectedYear: yearSnapshot.data ?? '',
+                                    );
+                                  },
+                                );
+                              },
+                            );                          case 3:
+                            return StreamBuilder<String>(
+                              stream: Provider.of(context).selectedMonth,
+                              builder: (context, monthSnapshot) {
+                                return StreamBuilder<String>(
+                                  stream: Provider.of(context).selectedYear,
+                                  builder: (context, yearSnapshot) {
+                                    if (!monthSnapshot.hasData || !yearSnapshot.hasData) {
+                                      return CircularProgressIndicator(); // Show a loading indicator if there's no data yet
+                                    }
+                                    return Data(
+                                      selectedMonth: monthSnapshot.data?? '',
+                                      selectedYear: yearSnapshot.data?? '',
+                                    );
+                                  },
+                                );
+                              },
+                            );
                           case 4:
                             return KPI();
                           case 5:

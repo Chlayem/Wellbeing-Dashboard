@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import '../blocs/provider.dart';
 import 'menu_item.dart';
 
@@ -18,7 +19,7 @@ class _DraweerState extends State<Draweer> {
     return Drawer(
       elevation: 0,
       //backgroundColor: Color.fromRGBO(3, 28, 48, 1.0),
-      child: Container(
+      child: Ink(
         decoration: BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topCenter,
@@ -38,8 +39,8 @@ class _DraweerState extends State<Draweer> {
                 leading: CircleAvatar(
                   backgroundImage: AssetImage("assets/James.jpg"),
                 ),
-                title: Text("James Rodriguez",style: TextStyle(color: Colors.white,),),
-                subtitle: Text("Human Resources Manager",style: TextStyle(color: Colors.grey),),
+                title: Text("James Rodriguez",style: GoogleFonts.mulish(color: Colors.white,),),
+                subtitle: Text("Human Resources Manager",style: GoogleFonts.mulish(color: Colors.grey),),
               ),
             ),
             Padding(
@@ -59,7 +60,7 @@ class _DraweerState extends State<Draweer> {
                       iconColor: Colors.white,
                       collapsedIconColor: Colors.white,
                       leading: Icon(widget.items[i].icon,color: Colors.white,),
-                      title: Text(widget.items[i].title,style:TextStyle(
+                      title: Text(widget.items[i].title,style:GoogleFonts.mulish(
                         color: Colors.white,
                         //letterSpacing: 3.0,
                       ) ,),
@@ -72,10 +73,10 @@ class _DraweerState extends State<Draweer> {
                               padding: EdgeInsets.only(left: 20.0),
                               child: ListTile(
                                   selected: l?[j].isSelected??false,
-                                  selectedTileColor: Color.fromRGBO(102, 122, 138, 1.0),
-                                hoverColor: Color.fromRGBO(102, 122, 138, 1.0),
+                                  selectedTileColor: Color.fromRGBO(100, 200, 220, 1.0),
+                                  hoverColor: Color.fromRGBO(100, 200, 220, 1.0),
                                 leading:Icon(l![j].icon,color: Colors.white,size: 15.0,) ,
-                                title: Text(l[j].title,style: TextStyle(
+                                title: Text(l[j].title,style: GoogleFonts.mulish(
                                   color: Colors.white,
                                   fontSize: 15.0,
                                 ),),
@@ -107,10 +108,10 @@ class _DraweerState extends State<Draweer> {
                   padding: EdgeInsets.fromLTRB(5.0,5.0,5.0,5.0),
                   child: ListTile(
                     selected: widget.items[i].isSelected,
-                    selectedTileColor: Color.fromRGBO(102, 122, 138, 1.0),
-                    hoverColor: Color.fromRGBO(102, 122, 138, 1.0),
+                    selectedTileColor: Color.fromRGBO(100, 200, 220, 1.0),
+                    hoverColor: Color.fromRGBO(100, 200, 220, 1.0),
                     leading: Icon(widget.items[i].icon,color: Colors.white,),
-                    title: Text(widget.items[i].title,style: TextStyle(
+                    title: Text(widget.items[i].title,style: GoogleFonts.mulish(
                       color: Colors.white,
                       //letterSpacing: 3.0,
                     ),),

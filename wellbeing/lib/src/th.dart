@@ -10,6 +10,7 @@ import 'elements/drawer.dart';
 import 'elements/menu_item.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+/*
 final List<Employee> emp=[
   Employee(firstName: "Jhon",lastName:"Rodriguez",department: "Marketing",stress:[
     ChartData(month: "Jan", value: 2),
@@ -57,9 +58,8 @@ final List<Employee> emp=[
   Employee(firstName: "Fred",lastName:"Rodriguez",department: "Finance",stress: [ChartData(month: "Mars")],anxiety: [ChartData(month: "Mars")],fatigue: [ChartData(month: "Mars")],email: "fred.james@gmail.com",job: "Developer",workHours:36,birthDate: DateTime(1980,5,20),recDate: DateTime(2019,2,23),num: 99885020),
   Employee(firstName: "Selena",lastName:"Rodriguez",department: "Marketing",stress: [ChartData(month: "Mars")],anxiety: [ChartData(month: "Mars")],fatigue: [ChartData(month: "Mars")],email: "selena.james@gmail.com",job: "Manager",workHours:36,birthDate: DateTime(1980,5,20),recDate: DateTime(2019,2,23),num: 21741133),
   Employee(firstName: "Adam",lastName:"Rodriguez",department: "Marketing",stress: [ChartData(month: "Mars")],anxiety: [ChartData(month: "Mars")],fatigue: [ChartData(month: "Mars")],email: "adam.james@gmail.com",job: "Manager",workHours:36,birthDate: DateTime(1980,5,20),recDate: DateTime(2019,2,23),num: 52114189),];
-final mark =emp.where((e) => e.department=="Marketing").toList();
-final finn =emp.where((e) => e.department=="Finance").toList();
-final prod =emp.where((e) => e.department=="Production").toList();
+*/
+
 class Th extends StatelessWidget {
 
   final List<MenuuItem> items =[
@@ -69,13 +69,18 @@ class Th extends StatelessWidget {
       MenuuItem(title: "Finance",  screenIndex: 2),
       MenuuItem(title: "Marketing", screenIndex: 3)
     ]),
-    MenuuItem(title: "Log out", icon: Icons.logout_outlined, screenIndex: 4),
+    MenuuItem(title: "Log out", icon: Icons.logout_rounded, screenIndex: 4),
   ];
 
 
 
   @override
   Widget build(BuildContext context) {
+    final List<Employee> emp =Provider.of(context).currentList ;
+    final mark =emp.where((e) => e.department=="Marketing").toList();
+    final finn =emp.where((e) => e.department=="Finance").toList();
+    final prod =emp.where((e) => e.department=="Production").toList();
+
     return MaterialApp(theme:ThemeData(
       textTheme: GoogleFonts.latoTextTheme(
         Theme.of(context).textTheme,
@@ -102,16 +107,16 @@ class Th extends StatelessWidget {
                     } else {
                       switch (snapshot.data) {
                         case 0:
-                          Provider.of(context).pushList(emp);
+                          Provider.of(context).pushListFound(emp);
                           return Dash(emp: emp,);
                         case 1:
-                          Provider.of(context).pushList(prod);
+                          Provider.of(context).pushListFound(prod);
                           return Dash(emp: prod);
                         case 2:
-                          Provider.of(context).pushList(finn);
+                          Provider.of(context).pushListFound(finn);
                           return Dash(emp: finn);
                         case 3:
-                          Provider.of(context).pushList(mark);
+                          Provider.of(context).pushListFound(mark);
                           return Dash(emp: mark);
                         case 4:
                           return Details();

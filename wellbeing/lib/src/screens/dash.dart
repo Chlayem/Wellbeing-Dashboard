@@ -42,7 +42,7 @@ class Dash extends StatelessWidget {
       }else{
         result=emp.where((e) => e.firstName!.toLowerCase().contains(entredKeyword.toLowerCase())).toList();
       }
-      Provider.of(context).pushList(result);
+      Provider.of(context).pushListFound(result);
     }
     double searchWidth ;
     double screenWidth = MediaQuery.of(context).size.width;
@@ -104,7 +104,7 @@ class Dash extends StatelessWidget {
               ),
             ),
             StreamBuilder<List<Employee>>(
-                stream:Provider.of(context).lists,
+                stream:Provider.of(context).foundedLists,
                 builder:(BuildContext context, AsyncSnapshot<List<Employee>> snapshot){
                   if (snapshot.hasData && snapshot.data != null){
                     empFound= snapshot.data!;
