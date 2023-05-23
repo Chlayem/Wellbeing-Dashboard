@@ -5,7 +5,9 @@ import 'menu_item.dart';
 
 class Draweer extends StatefulWidget {
   List<MenuuItem> items;
-  Draweer({required this.items});
+  String username;
+  String role;
+  Draweer({required this.items,required this.username,required this.role});
   @override
   State<Draweer> createState() => _DraweerState();
 }
@@ -39,8 +41,8 @@ class _DraweerState extends State<Draweer> {
                 leading: CircleAvatar(
                   backgroundImage: AssetImage("assets/James.jpg"),
                 ),
-                title: Text("James Rodriguez",style: GoogleFonts.mulish(color: Colors.white,),),
-                subtitle: Text("Human Resources Manager",style: GoogleFonts.mulish(color: Colors.grey),),
+                title: Text(widget.username,style: GoogleFonts.mulish(color: Colors.white,),),
+                subtitle: Text(widget.role,style: GoogleFonts.mulish(color: Colors.grey),),
               ),
             ),
             Padding(

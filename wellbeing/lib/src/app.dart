@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:wellbeing/src/screens/teamdet.dart';
 import 'elements/chart_data.dart';
@@ -61,6 +62,10 @@ import 'screens/data.dart';
   Employee(firstName: "Adam",lastName:"Rodriguez",department: "Marketing",*//*stress: 1,anxiety: 0,fatigue: 2,*//*email: "adam.james@gmail.com",job: "Manager",workHours:36,birthDate: DateTime(1980,5,20),recDate: DateTime(2019,2,23),num: 52114189),
 ];*/
 class App extends StatelessWidget {
+   String username ;
+   String role ;
+  App({required this.username,required this.role});
+
   final List<MenuuItem> items =[
     MenuuItem(title: "Home", icon: Icons.home,screenIndex: 0,isSelected: true),
     MenuuItem(title: "Team", icon: Icons.people,screenIndex: 1),
@@ -76,90 +81,20 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    return Provider(
-      child: MaterialApp(debugShowCheckedModeBanner:false,home: Builder(builder: (BuildContext context) {
-
-        return MediaQuery.of(context).size.width > 1100
-            ? Scaffold(
-                body: Row(
-                children: [
-                  SizedBox(
-                    width: MediaQuery.of(context).size.width*0.25,
-                    child:Draweer(items: items),
-                  ),
-                  SizedBox(
-                    width: MediaQuery.of(context).size.width*0.75,
-                    child: StreamBuilder<int>(
-                      stream: Provider.of(context).screens,
-                      builder:
-                          (BuildContext context, AsyncSnapshot<int> snapshot) {
-                        if (!snapshot.hasData) {
-                          return Home(); // Default screen to show when the stream doesn't have any data yet
-                        } else {
-                          switch (snapshot.data) {
-                            case 0:
-                              return Home();
-                            case 1:
-                              return Crud(emp: Provider.of(context).currentList);
-                            case 2:
-                              return StreamBuilder<String>(
-                                stream: Provider.of(context).selectedMonth,
-                                builder: (context, monthSnapshot) {
-                                  return StreamBuilder<String>(
-                                    stream: Provider.of(context).selectedYear,
-                                    builder: (context, yearSnapshot) {
-                                      if (!monthSnapshot.hasData || !yearSnapshot.hasData) {
-                                        return CircularProgressIndicator(); // Show a loading indicator if there's no data yet
-                                      }
-                                      return Indicators(
-                                        selectedMonth: monthSnapshot.data ?? '',
-                                        selectedYear: yearSnapshot.data ?? '',
-                                      );
-                                    },
-                                  );
-                                },
-                              );
-                            case 3:
-                              return StreamBuilder<String>(
-                                stream: Provider.of(context).selectedMonth,
-                                builder: (context, monthSnapshot) {
-                                  return StreamBuilder<String>(
-                                    stream: Provider.of(context).selectedYear,
-                                    builder: (context, yearSnapshot) {
-                                      if (!monthSnapshot.hasData || !yearSnapshot.hasData) {
-                                        return CircularProgressIndicator(); // Show a loading indicator if there's no data yet
-                                      }
-                                      return Data(
-                                        selectedMonth: monthSnapshot.data?? '',
-                                        selectedYear: yearSnapshot.data?? '',
-                                      );
-                                    },
-                                  );
-                                },
-                              );
-                            case 4:
-                              return KPI();
-                            case 5:
-                              return YTD();
-                            case 6:
-                              return Parameters();
-                            case 7:
-                              return Detail();
-                            default:
-                              return Home(); // Default screen to show if the latest value in the stream doesn't match any of the cases
-                          }
-                        }
-                      },
-                    ),
-                  ),
-                ],
-              ))
-            : Scaffold(
-                appBar: AppBar(title: Text('WellBeing Dashboard'),backgroundColor: Color.fromRGBO(3, 28, 48, 1.0)),
-                drawer: Draweer(items: items,),
-                body: StreamBuilder<int>(
+      return MediaQuery.of(context).size.width > 1100
+          ? Scaffold(
+              body: Row(
+              children: [
+                SizedBox(
+                  width: MediaQuery.of(context).size.width*0.25,
+                  child:Draweer(username:username,role:role,items: items),
+                ),
+                SizedBox(
+                  width: MediaQuery.of(context).size.width*0.75,
+                  child: StreamBuilder<int>(
                     stream: Provider.of(context).screens,
-                    builder: (BuildContext context, AsyncSnapshot<int> snapshot) {
+                    builder:
+                        (BuildContext context, AsyncSnapshot<int> snapshot) {
                       if (!snapshot.hasData) {
                         return Home(); // Default screen to show when the stream doesn't have any data yet
                       } else {
@@ -185,7 +120,8 @@ class App extends StatelessWidget {
                                   },
                                 );
                               },
-                            );                          case 3:
+                            );
+                          case 3:
                             return StreamBuilder<String>(
                               stream: Provider.of(context).selectedMonth,
                               builder: (context, monthSnapshot) {
@@ -208,16 +144,87 @@ class App extends StatelessWidget {
                           case 5:
                             return YTD();
                           case 6:
-                            return Parameters();
+                            FirebaseAuth.instance.signOut();
+                            Navigator.of(context).pop();
+                            Provider.of(context).navigateToScreen(0);
+
+                            return Text('Log out');
                           case 7:
                             return Detail();
                           default:
                             return Home(); // Default screen to show if the latest value in the stream doesn't match any of the cases
                         }
                       }
-                    }),
-              );
-      })),
-    );
+                    },
+                  ),
+                ),
+              ],
+            ))
+          : Scaffold(
+              appBar: AppBar(title: Text('WellBeing Dashboard'),backgroundColor: Color.fromRGBO(3, 28, 48, 1.0)),
+              drawer: Draweer(username:username,role:role,items: items,),
+              body: StreamBuilder<int>(
+                  stream: Provider.of(context).screens,
+                  builder: (BuildContext context, AsyncSnapshot<int> snapshot) {
+                    if (!snapshot.hasData) {
+                      return Home(); // Default screen to show when the stream doesn't have any data yet
+                    } else {
+                      switch (snapshot.data) {
+                        case 0:
+                          return Home();
+                        case 1:
+                          return Crud(emp: Provider.of(context).currentList);
+                        case 2:
+                          return StreamBuilder<String>(
+                            stream: Provider.of(context).selectedMonth,
+                            builder: (context, monthSnapshot) {
+                              return StreamBuilder<String>(
+                                stream: Provider.of(context).selectedYear,
+                                builder: (context, yearSnapshot) {
+                                  if (!monthSnapshot.hasData || !yearSnapshot.hasData) {
+                                    return CircularProgressIndicator(); // Show a loading indicator if there's no data yet
+                                  }
+                                  return Indicators(
+                                    selectedMonth: monthSnapshot.data ?? '',
+                                    selectedYear: yearSnapshot.data ?? '',
+                                  );
+                                },
+                              );
+                            },
+                          );                          case 3:
+                          return StreamBuilder<String>(
+                            stream: Provider.of(context).selectedMonth,
+                            builder: (context, monthSnapshot) {
+                              return StreamBuilder<String>(
+                                stream: Provider.of(context).selectedYear,
+                                builder: (context, yearSnapshot) {
+                                  if (!monthSnapshot.hasData || !yearSnapshot.hasData) {
+                                    return CircularProgressIndicator(); // Show a loading indicator if there's no data yet
+                                  }
+                                  return Data(
+                                    selectedMonth: monthSnapshot.data?? '',
+                                    selectedYear: yearSnapshot.data?? '',
+                                  );
+                                },
+                              );
+                            },
+                          );
+                        case 4:
+                          return KPI();
+                        case 5:
+                          return YTD();
+                        case 6:
+                          FirebaseAuth.instance.signOut();
+                          Navigator.of(context).pop();
+                          Provider.of(context).navigateToScreen(0);
+                          return Text('Log out');
+                        case 7:
+                          return Detail();
+                        default:
+                          return Home(); // Default screen to show if the latest value in the stream doesn't match any of the cases
+                      }
+                    }
+                  }),
+            );
   }
 }

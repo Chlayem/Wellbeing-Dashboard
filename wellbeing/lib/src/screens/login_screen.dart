@@ -16,7 +16,7 @@ import 'package:flutter_application_1/screens/forgot_password.dart';
 import 'package:flutter_application_1/screens/signup_screen.dart';
 import 'package:flutter_application_1/widgets/customized_textfield.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:flutter_application_1/screens/RHScreen.dart';
+import 'package:flutter_application_1/screens/Human ressources managerScreen.dart';
 import 'package:flutter_application_1/screens/TherapistScreen.dart';
 
 import 'package:flutter_application_1/auth/bloc/auth_bloc.dart';
@@ -51,22 +51,26 @@ class _loginscreenState extends State<loginscreen> {
       final String password = _passwordController.text ;
       UserCredential userCredential = await _auth.signInWithEmailAndPassword(email: email, password: password) ;
 
+
       var querysnapshot = await FirebaseFirestore.instance.collection('users').where('email', isEqualTo: _emailController.text).where('password', isEqualTo: _passwordController.text).limit(1).get();
+      _emailController.clear();
+      _passwordController.clear();
+
+
       if (querysnapshot.docs.isNotEmpty){
         Map<String,dynamic> data =querysnapshot.docs.first.data() ;
         String fieldvalue = data["role"];
+        print(fieldvalue);
         switch (fieldvalue){
-          case 'RH' :
+          case 'Human ressources manager' :
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => App()),
-            );
+              MaterialPageRoute(builder: (context) => App(username: data["username"],role: fieldvalue,),));
             break ;
-          case 'Thérapeute' :
+          case 'Therapist' :
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => Th()),
-            );
+              MaterialPageRoute(builder: (context) => Th(username: data["username"],role: fieldvalue,)),);
             break ;
 
         }}}on FirebaseException catch (e) {

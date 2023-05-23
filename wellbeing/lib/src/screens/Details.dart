@@ -263,6 +263,8 @@ class Details extends StatelessWidget {
                                 padding: const EdgeInsets.symmetric(vertical: 30.0,horizontal:20.0),
                                 child: KpiChart(
                                   chartData: employee.stress,
+                                  positionedText:'',
+
                                   title: 'Stress',
                                   xValueMapper: (ChartData data) => data.month,
                                   yValueMapper: (ChartData data, int _) => data.value,
@@ -272,6 +274,8 @@ class Details extends StatelessWidget {
                                 padding: const EdgeInsets.symmetric(vertical: 30.0,horizontal:20.0),
                                 child: KpiChart(
                                   chartData: employee.anxiety,
+                                  positionedText:'',
+
                                   title: 'Anxiety',
                                   xValueMapper: (ChartData data) => data.month,
                                   yValueMapper: (ChartData data, int _) => data.value,
@@ -281,6 +285,8 @@ class Details extends StatelessWidget {
                                 padding: const EdgeInsets.symmetric(vertical: 30.0,horizontal:20.0),
                                 child: KpiChart(
                                   chartData: employee.fatigue,
+                                  positionedText:'',
+
                                   title: 'Fatigue',
                                   xValueMapper: (ChartData data) => data.month,
                                   yValueMapper: (ChartData data, int _) => data.value,

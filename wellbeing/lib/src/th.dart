@@ -1,9 +1,11 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import 'package:wellbeing/src/elements/employee.dart';
 import 'package:wellbeing/src/screens/Details.dart';
 import 'package:wellbeing/src/screens/dash.dart';
 import 'package:wellbeing/src/screens/parameters.dart';
+import 'package:wellbeing/src/screens/welcome_screen.dart';
 import 'blocs/provider.dart';
 import 'elements/chart_data.dart';
 import 'elements/drawer.dart';
@@ -61,6 +63,9 @@ final List<Employee> emp=[
 */
 
 class Th extends StatelessWidget {
+  String username ;
+  String role ;
+  Th({required this.username,required this.role});
 
   final List<MenuuItem> items =[
     MenuuItem(title: "Home", icon: Icons.home, screenIndex: 0,isSelected: true),
@@ -69,7 +74,7 @@ class Th extends StatelessWidget {
       MenuuItem(title: "Finance",  screenIndex: 2),
       MenuuItem(title: "Marketing", screenIndex: 3)
     ]),
-    MenuuItem(title: "Log out", icon: Icons.logout_rounded, screenIndex: 4),
+    MenuuItem(title: "Log out", icon: Icons.logout_rounded, screenIndex: 5),
   ];
 
 
@@ -81,20 +86,14 @@ class Th extends StatelessWidget {
     final finn =emp.where((e) => e.department=="Finance").toList();
     final prod =emp.where((e) => e.department=="Production").toList();
 
-    return MaterialApp(theme:ThemeData(
-      textTheme: GoogleFonts.latoTextTheme(
-        Theme.of(context).textTheme,
-      ),
-      fontFamily:'VarelaRound',
-    ),
-        home: Builder(builder: (BuildContext context) {
+
       return MediaQuery.of(context).size.width > 900
           ? Scaffold(
           body: Row(
             children: [
               SizedBox(
                 width: MediaQuery.of(context).size.width*0.25,
-                child:Draweer(items: items),
+                child:Draweer(username:username,role:role,items: items),
               ),
               SizedBox(
                 width: MediaQuery.of(context).size.width*0.75,
@@ -120,6 +119,12 @@ class Th extends StatelessWidget {
                           return Dash(emp: mark);
                         case 4:
                           return Details();
+                        case 5:
+                          FirebaseAuth.instance.signOut();
+                          Navigator.of(context).pop();
+                          Provider.of(context).navigateToScreen(0);
+
+                          return Text('Log out');
                         default:
                           Provider.of(context).pushList(emp);
                           return Dash(emp: emp,); // Default screen to show if the latest value in the stream doesn't match any of the cases
@@ -132,7 +137,7 @@ class Th extends StatelessWidget {
           ))
           : Scaffold(
               appBar: AppBar(title: Text('WellBeing Dashboard'),backgroundColor: Color.fromRGBO(3, 28, 48, 1.0),),
-              drawer: Draweer(items: items,),
+              drawer: Draweer(username:username,role:role,items: items),
               body: StreamBuilder<int>(
                   stream: Provider.of(context).screens,
                   builder: (BuildContext context, AsyncSnapshot<int> snapshot) {
@@ -155,6 +160,13 @@ class Th extends StatelessWidget {
                           return Dash(emp: mark);
                         case 4:
                           return Details();
+                        case 5:
+                          FirebaseAuth.instance.signOut();
+                          Navigator.of(context).pop();
+                          Provider.of(context).navigateToScreen(0);
+
+                          return Text('Log out');
+
                         default:
                           Provider.of(context).pushList(emp);
                           return Dash(emp: emp,); // Default screen to show if the latest value in the stream doesn't match any of the cases
@@ -162,6 +174,5 @@ class Th extends StatelessWidget {
                     }
                   }),
       );
-    }));
   }
 }

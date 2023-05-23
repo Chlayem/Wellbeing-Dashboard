@@ -92,9 +92,9 @@ class _YTDState extends State<YTD> {
               ),
             ),
             // Les courbes
-            _selectedMonth == null
-                ? Center(child: Text('Please select a month'))
-                : Column(
+            //_selectedMonth == null
+                //? Center(child: Text('Please select a month')):
+                 Column(
                   children: [
                     GridView.count(
                       childAspectRatio: 2,
@@ -108,6 +108,8 @@ class _YTDState extends State<YTD> {
                           const EdgeInsets.fromLTRB(8.0, 25, 8.0, 0),
                           child: KpiChart(
                             chartData: chartData,
+                            positionedText:'70',
+
                             title: 'Incidents',
                             xValueMapper: (ChartData data) => data.month,
                             yValueMapper: (ChartData data, int _) =>
@@ -120,6 +122,8 @@ class _YTDState extends State<YTD> {
                           const EdgeInsets.fromLTRB(8.0, 25, 8.0, 0),
                           child: KpiChart(
                             chartData: chartData,
+                            positionedText:'44',
+
                             title: 'Critical Incident',
                             xValueMapper: (ChartData data) => data.month,
                             yValueMapper: (ChartData data, int _) =>
@@ -131,6 +135,8 @@ class _YTDState extends State<YTD> {
                           const EdgeInsets.fromLTRB(8.0, 25, 8.0, 0),
                           child: KpiChart(
                             chartData: chartData,
+                            positionedText:'96',
+
                             title: 'Incidents > 3 days of absents',
                             xValueMapper: (ChartData data) => data.month,
                             yValueMapper: (ChartData data, int _) =>
@@ -142,6 +148,8 @@ class _YTDState extends State<YTD> {
                           const EdgeInsets.fromLTRB(8.0, 25, 8.0, 0),
                           child: KpiChart(
                             chartData: chartData,
+                            positionedText:'31',
+
                             title: 'Incidents Cost',
                             xValueMapper: (ChartData data) => data.month,
                             yValueMapper: (ChartData data, int _) =>
