@@ -1,11 +1,11 @@
 # Wellbeing Dashboard
 
-## Overview
+## 🌐 Overview
 This project was part of my educational journey at **ENSI** named **"Design and Development Project"**.
 
 It was a fantastic opportunity to dive into web and mobile development, gaining hands-on experience with frontend development using **Flutter** and **Firebase**, as well as UI design using **Figma**.
 
-## Description
+## 📋 Description
 The Wellbeing Dashboard application aims to enhance employee health and well-being, which are crucial for the efficient functioning of a company.
 Healthier and happier employees are more productive and satisfied with their work. By providing tools for HR managers and therapists, this application helps companies improve their employees' well-being, leading to reduced absenteeism, turnover, and associated costs.
 
@@ -13,7 +13,7 @@ The application includes:
 - A dashboard for HR managers to set well-being goals and visualize overall and departmental well-being metrics.
 - An interface for therapists to access employees' personal and emotional data to provide better support.
 
-## Tools and Technologies
+## 🧰 Tools and Technologies
 ![Figma](https://img.shields.io/badge/Figma-F24E1E?style=for-the-badge&logo=figma&logoColor=white)
 ![Flutter](https://img.shields.io/badge/Flutter-02569B?style=for-the-badge&logo=flutter&logoColor=white)
 ![Dart](https://img.shields.io/badge/Dart-0175C2?style=for-the-badge&logo=dart&logoColor=white)
@@ -21,13 +21,13 @@ The application includes:
 ![Trello](https://img.shields.io/badge/Trello-0052CC?style=for-the-badge&logo=trello&logoColor=white)
 
 
-## Features
+## 🌟 Features
 - **Responsive Design :** Ensures optimal display and functionality across different screens.
 - **User Authentication :** Secure login and profile management.
 - **Real-Time Data :** Synchronization with Firebase for live updates.
 - **Data Visualization :** Insightful and interactive dashboards for HR and therapists.
 
-## Screenshots
+## 📸 Screenshots
 
 The following screenshots provide a visual overview of the Wellbeing Dashboard application across different screen sizes.
 
@@ -76,7 +76,7 @@ Optimized for smartphones, these screenshots ensure the application remains user
 </div>
 
 
-## Demo
+## 🎬 Demo
 Experience a walkthrough of the Wellbeing Dashboard application in action. This demo showcases the key features and user interfaces of this application :
 
 
